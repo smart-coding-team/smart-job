@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smartcoding.schedule.mapper.XxlJobAlarmLogMapper">
+
+    <resultMap type="com.smartcoding.schedule.core.model.XxlJobAlarmLog" id="XxlJobAlarmLogResult">
+        <result column="id" property="id"/>
+        <result column="log_id" property="logId"/>
+        <result column="job_id" property="jobId"/>
+        <result column="job_name" property="jobName"/>
+        <result column="alarm_id" property="alarmId"/>
+        <result column="alarm_name" property="alarmName"/>
+        <result column="send_status" property="sendStatus"/>
+        <result column="notice_username" property="noticeUsername"/>
+        <result column="notice_way" property="noticeWay"/>
+        <result column="error_msg" property="errorMsg"/>
+        <result column="gmt_create" property="gmtCreate"/>
+        <result column="gmt_modified" property="gmtModified"/>
+    </resultMap>
+
+    <sql id="selectXxlJobAlarmLogVo">
+        select id, log_id, alarm_id, alarm_name, send_status, job_id, job_name,notice_username, notice_way,error_msg, gmt_create, gmt_modified from xxl_job_alarm_log
+    </sql>
+
+    <select id="selectXxlJobAlarmLogList" parameterType="com.smartcoding.schedule.core.model.XxlJobAlarmLog"
+            resultMap="XxlJobAlarmLogResult">
+        <include refid="selectXxlJobAlarmLogVo"/>
+        <where>
+            <if test="logId != null ">and log_id = #{logId}</if>
+            <if test="sendStatus != null ">and send_status = #{sendStatus}</if>
+        </where>
+        order by id desc
+    </select>
+
+    <select id="selectXxlJobAlarmLogById" parameterType="Long" resultMap="XxlJobAlarmLogResult">
+        <include refid="selectXxlJobAlarmLogVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertXxlJobAlarmLog" parameterType="com.smartcoding.schedule.core.model.XxlJobAlarmLog"
+            useGeneratedKeys="true" keyProperty="id">
+        insert into xxl_job_alarm_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="logId != null">log_id,</if>
+            <if test="alarmId != null">alarm_id,</if>
+            <if test="alarmName != null">alarm_name,</if>
+            <if test="sendStatus != null">send_status,</if>
+            <if test="jobId != null">job_id,</if>
+            <if test="jobName != null">job_name,</if>
+            <if test="noticeUsername != null">notice_username,</if>
+            <if test="noticeWay != null">notice_way,</if>
+            <if test="errorMsg != null">error_msg,</if>
+            <if test="gmtCreate != null">gmt_create,</if>
+            <if test="gmtModified != null">gmt_modified,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="logId != null">#{logId},</if>
+            <if test="alarmId != null">#{alarmId},</if>
+            <if test="alarmName != null">#{alarmName},</if>
+            <if test="sendStatus != null">#{sendStatus},</if>
+            <if test="jobId != null">#{jobId},</if>
+            <if test="jobName != null">#{jobName},</if>
+            <if test="noticeUsername != null">#{noticeUsername},</if>
+            <if test="noticeWay != null">#{noticeWay},</if>
+            <if test="errorMsg != null">#{errorMsg},</if>
+            <if test="gmtCreate != null">#{gmtCreate},</if>
+            <if test="gmtModified != null">#{gmtModified},</if>
+        </trim>
+    </insert>
+
+    <update id="updateXxlJobAlarmLog" parameterType="com.smartcoding.schedule.core.model.XxlJobAlarmLog">
+        update xxl_job_alarm_log
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="logId != null">log_id = #{logId},</if>
+            <if test="alarmId != null">alarm_id = #{alarmId},</if>
+            <if test="alarmName != null">alarm_name = #{alarmName},</if>
+            <if test="sendStatus != null">send_status = #{sendStatus},</if>
+            <if test="jobId != null">job_id = #{jobId},</if>
+            <if test="jobName != null">job_name = #{jobName},</if>
+            <if test="noticeUsername != null">notice_username = #{noticeUsername},</if>
+            <if test="noticeWay != null">notice_way = #{noticeWay},</if>
+            <if test="errorMsg != null">error_msg = #{errorMsg},</if>
+            <if test="gmtCreate != null">gmt_create = #{gmtCreate},</if>
+            <if test="gmtModified != null">gmt_modified = #{gmtModified},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXxlJobAlarmLogById" parameterType="Long">
+        delete from xxl_job_alarm_log where id = #{id}
+    </delete>
+
+    <delete id="deleteXxlJobAlarmLogByIds" parameterType="String">
+        delete from xxl_job_alarm_log where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

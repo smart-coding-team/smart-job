@@ -1,0 +1,620 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smartcoding.schedule.mapper.XxlJobInfoMapper">
+  <resultMap id="BaseResultMap" type="com.smartcoding.schedule.core.model.XxlJobInfo">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="job_group" jdbcType="BIGINT" property="jobGroup" />
+    <result column="job_cron" jdbcType="VARCHAR" property="jobCron" />
+    <result column="job_name" jdbcType="VARCHAR" property="jobName" />
+    <result column="job_status" jdbcType="TINYINT" property="jobStatus" />
+    <result column="create_way" jdbcType="TINYINT" property="createWay" />
+    <result column="add_time" jdbcType="TIMESTAMP" property="addTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="author" jdbcType="VARCHAR" property="author" />
+    <result column="alarm_user_ids" jdbcType="VARCHAR" property="alarmUserIds" />
+    <result column="executor_route_strategy" jdbcType="VARCHAR" property="executorRouteStrategy" />
+    <result column="executor_handler" jdbcType="VARCHAR" property="executorHandler" />
+    <result column="executor_param" jdbcType="VARCHAR" property="executorParam" />
+    <result column="executor_block_strategy" jdbcType="VARCHAR" property="executorBlockStrategy" />
+    <result column="executor_timeout" jdbcType="INTEGER" property="executorTimeout" />
+    <result column="executor_fail_retry_count" jdbcType="INTEGER" property="executorFailRetryCount" />
+    <result column="glue_type" jdbcType="VARCHAR" property="glueType" />
+    <result column="glue_remark" jdbcType="VARCHAR" property="glueRemark" />
+    <result column="glue_updatetime" jdbcType="TIMESTAMP" property="glueUpdatetime" />
+    <result column="child_job_id" jdbcType="VARCHAR" property="childJobId" />
+    <result column="trigger_status" jdbcType="TINYINT" property="triggerStatus" />
+    <result column="trigger_last_time" jdbcType="BIGINT" property="triggerLastTime" />
+    <result column="trigger_next_time" jdbcType="BIGINT" property="triggerNextTime" />
+    <result column="last_job_log_id" jdbcType="BIGINT" property="lastJobLogId" />
+    <result column="last_trigger_code" jdbcType="INTEGER" property="lastTriggerCode" />
+    <result column="last_trigger_time" jdbcType="TIMESTAMP" property="lastTriggerTime" />
+    <result column="last_handle_code" jdbcType="INTEGER" property="lastHandleCode" />
+    <result column="last_handle_time" jdbcType="TIMESTAMP" property="lastHandleTime" />
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.smartcoding.schedule.core.model.XxlJobInfo">
+    <result column="glue_source" jdbcType="LONGVARCHAR" property="glueSource" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, job_group, job_cron, job_name, job_status,create_way, add_time, update_time, author, alarm_user_ids,
+    executor_route_strategy, executor_handler, executor_param, executor_block_strategy,
+    executor_timeout, executor_fail_retry_count, glue_type, glue_remark, glue_updatetime,
+    child_job_id, trigger_status, trigger_last_time, trigger_next_time, last_job_log_id,
+    last_trigger_code, last_trigger_time, last_handle_code, last_handle_time, gmt_create,
+    gmt_modified
+  </sql>
+  <sql id="Blob_Column_List">
+    glue_source
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from xxl_job_info
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from xxl_job_info
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.smartcoding.schedule.core.model.XxlJobInfo">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into xxl_job_info (job_group, job_cron, job_name,
+      job_status,create_way, add_time, update_time,
+      author, alarm_user_ids, executor_route_strategy,
+      executor_handler, executor_param, executor_block_strategy,
+      executor_timeout, executor_fail_retry_count,
+      glue_type, glue_remark, glue_updatetime,
+      child_job_id, trigger_status, trigger_last_time,
+      trigger_next_time, last_job_log_id, last_trigger_code,
+      last_trigger_time, last_handle_code, last_handle_time,
+      gmt_create, gmt_modified, glue_source
+      )
+    values (#{jobGroup,jdbcType=BIGINT}, #{jobCron,jdbcType=VARCHAR}, #{jobName,jdbcType=VARCHAR},
+      #{jobStatus,jdbcType=TINYINT}, #{createWay,jdbcType=TINYINT}, #{addTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
+      #{author,jdbcType=VARCHAR}, #{alarmUserIds,jdbcType=VARCHAR}, #{executorRouteStrategy,jdbcType=VARCHAR},
+      #{executorHandler,jdbcType=VARCHAR}, #{executorParam,jdbcType=VARCHAR}, #{executorBlockStrategy,jdbcType=VARCHAR},
+      #{executorTimeout,jdbcType=INTEGER}, #{executorFailRetryCount,jdbcType=INTEGER},
+      #{glueType,jdbcType=VARCHAR}, #{glueRemark,jdbcType=VARCHAR}, #{glueUpdatetime,jdbcType=TIMESTAMP},
+      #{childJobId,jdbcType=VARCHAR}, #{triggerStatus,jdbcType=TINYINT}, #{triggerLastTime,jdbcType=BIGINT},
+      #{triggerNextTime,jdbcType=BIGINT}, #{lastJobLogId,jdbcType=BIGINT}, #{lastTriggerCode,jdbcType=INTEGER},
+      #{lastTriggerTime,jdbcType=TIMESTAMP}, #{lastHandleCode,jdbcType=INTEGER}, #{lastHandleTime,jdbcType=TIMESTAMP},
+      #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, #{glueSource,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.smartcoding.schedule.core.model.XxlJobInfo">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into xxl_job_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="jobGroup != null">
+        job_group,
+      </if>
+      <if test="jobCron != null">
+        job_cron,
+      </if>
+      <if test="jobName != null">
+        job_name,
+      </if>
+      <if test="jobStatus != null">
+        job_status,
+      </if>
+      <if test="createWay != null">
+        create_way,
+      </if>
+      <if test="addTime != null">
+        add_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="author != null">
+        author,
+      </if>
+      <if test="alarmUserIds != null">
+        alarm_user_ids,
+      </if>
+      <if test="executorRouteStrategy != null">
+        executor_route_strategy,
+      </if>
+      <if test="executorHandler != null">
+        executor_handler,
+      </if>
+      <if test="executorParam != null">
+        executor_param,
+      </if>
+      <if test="executorBlockStrategy != null">
+        executor_block_strategy,
+      </if>
+      <if test="executorTimeout != null">
+        executor_timeout,
+      </if>
+      <if test="executorFailRetryCount != null">
+        executor_fail_retry_count,
+      </if>
+      <if test="glueType != null">
+        glue_type,
+      </if>
+      <if test="glueRemark != null">
+        glue_remark,
+      </if>
+      <if test="glueUpdatetime != null">
+        glue_updatetime,
+      </if>
+      <if test="childJobId != null">
+        child_job_id,
+      </if>
+      <if test="triggerStatus != null">
+        trigger_status,
+      </if>
+      <if test="triggerLastTime != null">
+        trigger_last_time,
+      </if>
+      <if test="triggerNextTime != null">
+        trigger_next_time,
+      </if>
+      <if test="lastJobLogId != null">
+        last_job_log_id,
+      </if>
+      <if test="lastTriggerCode != null">
+        last_trigger_code,
+      </if>
+      <if test="lastTriggerTime != null">
+        last_trigger_time,
+      </if>
+      <if test="lastHandleCode != null">
+        last_handle_code,
+      </if>
+      <if test="lastHandleTime != null">
+        last_handle_time,
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create,
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified,
+      </if>
+      <if test="glueSource != null">
+        glue_source,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="jobGroup != null">
+        #{jobGroup,jdbcType=BIGINT},
+      </if>
+      <if test="jobCron != null">
+        #{jobCron,jdbcType=VARCHAR},
+      </if>
+      <if test="jobName != null">
+        #{jobName,jdbcType=VARCHAR},
+      </if>
+      <if test="jobStatus != null">
+        #{jobStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createWay != null">
+        #{createWay,jdbcType=TINYINT},
+      </if>
+      <if test="addTime != null">
+        #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="author != null">
+        #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="alarmUserIds != null">
+        #{alarmUserIds,jdbcType=VARCHAR},
+      </if>
+      <if test="executorRouteStrategy != null">
+        #{executorRouteStrategy,jdbcType=VARCHAR},
+      </if>
+      <if test="executorHandler != null">
+        #{executorHandler,jdbcType=VARCHAR},
+      </if>
+      <if test="executorParam != null">
+        #{executorParam,jdbcType=VARCHAR},
+      </if>
+      <if test="executorBlockStrategy != null">
+        #{executorBlockStrategy,jdbcType=VARCHAR},
+      </if>
+      <if test="executorTimeout != null">
+        #{executorTimeout,jdbcType=INTEGER},
+      </if>
+      <if test="executorFailRetryCount != null">
+        #{executorFailRetryCount,jdbcType=INTEGER},
+      </if>
+      <if test="glueType != null">
+        #{glueType,jdbcType=VARCHAR},
+      </if>
+      <if test="glueRemark != null">
+        #{glueRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="glueUpdatetime != null">
+        #{glueUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="childJobId != null">
+        #{childJobId,jdbcType=VARCHAR},
+      </if>
+      <if test="triggerStatus != null">
+        #{triggerStatus,jdbcType=TINYINT},
+      </if>
+      <if test="triggerLastTime != null">
+        #{triggerLastTime,jdbcType=BIGINT},
+      </if>
+      <if test="triggerNextTime != null">
+        #{triggerNextTime,jdbcType=BIGINT},
+      </if>
+      <if test="lastJobLogId != null">
+        #{lastJobLogId,jdbcType=BIGINT},
+      </if>
+      <if test="lastTriggerCode != null">
+        #{lastTriggerCode,jdbcType=INTEGER},
+      </if>
+      <if test="lastTriggerTime != null">
+        #{lastTriggerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastHandleCode != null">
+        #{lastHandleCode,jdbcType=INTEGER},
+      </if>
+      <if test="lastHandleTime != null">
+        #{lastHandleTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtCreate != null">
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="glueSource != null">
+        #{glueSource,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.smartcoding.schedule.core.model.XxlJobInfo">
+    update xxl_job_info
+    <set>
+      <if test="jobGroup != null">
+        job_group = #{jobGroup,jdbcType=BIGINT},
+      </if>
+      <if test="jobCron != null">
+        job_cron = #{jobCron,jdbcType=VARCHAR},
+      </if>
+      <if test="jobName != null">
+        job_name = #{jobName,jdbcType=VARCHAR},
+      </if>
+      <if test="jobStatus != null">
+        job_status = #{jobStatus,jdbcType=TINYINT},
+      </if>
+      <if test="createWay != null">
+        create_way = #{createWay,jdbcType=TINYINT},
+      </if>
+      <if test="addTime != null">
+        add_time = #{addTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="author != null">
+        author = #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="alarmUserIds != null">
+        alarm_user_ids = #{alarmUserIds,jdbcType=VARCHAR},
+      </if>
+      <if test="executorRouteStrategy != null">
+        executor_route_strategy = #{executorRouteStrategy,jdbcType=VARCHAR},
+      </if>
+      <if test="executorHandler != null">
+        executor_handler = #{executorHandler,jdbcType=VARCHAR},
+      </if>
+      <if test="executorParam != null">
+        executor_param = #{executorParam,jdbcType=VARCHAR},
+      </if>
+      <if test="executorBlockStrategy != null">
+        executor_block_strategy = #{executorBlockStrategy,jdbcType=VARCHAR},
+      </if>
+      <if test="executorTimeout != null">
+        executor_timeout = #{executorTimeout,jdbcType=INTEGER},
+      </if>
+      <if test="executorFailRetryCount != null">
+        executor_fail_retry_count = #{executorFailRetryCount,jdbcType=INTEGER},
+      </if>
+      <if test="glueType != null">
+        glue_type = #{glueType,jdbcType=VARCHAR},
+      </if>
+      <if test="glueRemark != null">
+        glue_remark = #{glueRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="glueUpdatetime != null">
+        glue_updatetime = #{glueUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="childJobId != null">
+        child_job_id = #{childJobId,jdbcType=VARCHAR},
+      </if>
+      <if test="triggerStatus != null">
+        trigger_status = #{triggerStatus,jdbcType=TINYINT},
+      </if>
+      <if test="triggerLastTime != null">
+        trigger_last_time = #{triggerLastTime,jdbcType=BIGINT},
+      </if>
+      <if test="triggerNextTime != null">
+        trigger_next_time = #{triggerNextTime,jdbcType=BIGINT},
+      </if>
+      <if test="lastJobLogId != null">
+        last_job_log_id = #{lastJobLogId,jdbcType=BIGINT},
+      </if>
+      <if test="lastTriggerCode != null">
+        last_trigger_code = #{lastTriggerCode,jdbcType=INTEGER},
+      </if>
+      <if test="lastTriggerTime != null">
+        last_trigger_time = #{lastTriggerTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastHandleCode != null">
+        last_handle_code = #{lastHandleCode,jdbcType=INTEGER},
+      </if>
+      <if test="lastHandleTime != null">
+        last_handle_time = #{lastHandleTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+      <if test="glueSource != null">
+        glue_source = #{glueSource,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.smartcoding.schedule.core.model.XxlJobInfo">
+    update xxl_job_info
+    set job_group = #{jobGroup,jdbcType=BIGINT},
+      job_cron = #{jobCron,jdbcType=VARCHAR},
+      job_name = #{jobName,jdbcType=VARCHAR},
+      job_status = #{jobStatus,jdbcType=TINYINT},
+      add_time = #{addTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      author = #{author,jdbcType=VARCHAR},
+      alarm_user_ids = #{alarmUserIds,jdbcType=VARCHAR},
+      executor_route_strategy = #{executorRouteStrategy,jdbcType=VARCHAR},
+      executor_handler = #{executorHandler,jdbcType=VARCHAR},
+      executor_param = #{executorParam,jdbcType=VARCHAR},
+      executor_block_strategy = #{executorBlockStrategy,jdbcType=VARCHAR},
+      executor_timeout = #{executorTimeout,jdbcType=INTEGER},
+      executor_fail_retry_count = #{executorFailRetryCount,jdbcType=INTEGER},
+      glue_type = #{glueType,jdbcType=VARCHAR},
+      glue_remark = #{glueRemark,jdbcType=VARCHAR},
+      glue_updatetime = #{glueUpdatetime,jdbcType=TIMESTAMP},
+      child_job_id = #{childJobId,jdbcType=VARCHAR},
+      trigger_status = #{triggerStatus,jdbcType=TINYINT},
+      trigger_last_time = #{triggerLastTime,jdbcType=BIGINT},
+      trigger_next_time = #{triggerNextTime,jdbcType=BIGINT},
+      last_job_log_id = #{lastJobLogId,jdbcType=BIGINT},
+      last_trigger_code = #{lastTriggerCode,jdbcType=INTEGER},
+      last_trigger_time = #{lastTriggerTime,jdbcType=TIMESTAMP},
+      last_handle_code = #{lastHandleCode,jdbcType=INTEGER},
+      last_handle_time = #{lastHandleTime,jdbcType=TIMESTAMP},
+      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      glue_source = #{glueSource,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.smartcoding.schedule.core.model.XxlJobInfo">
+    update xxl_job_info
+    set job_group = #{jobGroup,jdbcType=BIGINT},
+      job_cron = #{jobCron,jdbcType=VARCHAR},
+      job_name = #{jobName,jdbcType=VARCHAR},
+      job_status = #{jobStatus,jdbcType=TINYINT},
+      add_time = #{addTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      author = #{author,jdbcType=VARCHAR},
+      alarm_user_ids = #{alarmUserIds,jdbcType=VARCHAR},
+      executor_route_strategy = #{executorRouteStrategy,jdbcType=VARCHAR},
+      executor_handler = #{executorHandler,jdbcType=VARCHAR},
+      executor_param = #{executorParam,jdbcType=VARCHAR},
+      executor_block_strategy = #{executorBlockStrategy,jdbcType=VARCHAR},
+      executor_timeout = #{executorTimeout,jdbcType=INTEGER},
+      executor_fail_retry_count = #{executorFailRetryCount,jdbcType=INTEGER},
+      glue_type = #{glueType,jdbcType=VARCHAR},
+      glue_remark = #{glueRemark,jdbcType=VARCHAR},
+      glue_updatetime = #{glueUpdatetime,jdbcType=TIMESTAMP},
+      child_job_id = #{childJobId,jdbcType=VARCHAR},
+      trigger_status = #{triggerStatus,jdbcType=TINYINT},
+      trigger_last_time = #{triggerLastTime,jdbcType=BIGINT},
+      trigger_next_time = #{triggerNextTime,jdbcType=BIGINT},
+      last_job_log_id = #{lastJobLogId,jdbcType=BIGINT},
+      last_trigger_code = #{lastTriggerCode,jdbcType=INTEGER},
+      last_trigger_time = #{lastTriggerTime,jdbcType=TIMESTAMP},
+      last_handle_code = #{lastHandleCode,jdbcType=INTEGER},
+      last_handle_time = #{lastHandleTime,jdbcType=TIMESTAMP},
+      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+	<!--==========================================手动添加sql语句开始分割线========================================-->
+	<sql id="Base_Column_List_2">
+		t.id,
+		t.job_group,
+		t.job_cron,
+		t.job_name,
+		t.job_status,
+		t.create_way,
+		t.add_time,
+		t.update_time,
+		t.author,
+		t.alarm_user_ids,
+		t.executor_route_strategy,
+		t.executor_handler,
+		t.executor_param,
+		t.executor_block_strategy,
+		t.executor_timeout,
+		t.executor_fail_retry_count,
+		t.glue_type,
+		t.glue_source,
+		t.glue_remark,
+		t.glue_updatetime,
+		t.child_job_id,
+		t.trigger_status,
+		t.trigger_last_time,
+		t.trigger_next_time,
+		t.last_job_log_id,
+		t.last_trigger_time,
+		t.last_handle_time,
+		t.last_trigger_code,
+		t.last_handle_code,
+        t.gmt_create,
+		t.gmt_modified
+	</sql>
+  <resultMap extends="BaseResultMap" id="XxlJobInfoBOResultMap" type="com.smartcoding.schedule.core.model.bo.XxlJobInfoBO">
+  </resultMap>
+  <select id="getJobList" parameterType="java.util.HashMap" resultMap="XxlJobInfoBOResultMap">
+    SELECT <include refid="Base_Column_List_2" />
+    FROM xxl_job_info AS t
+    <trim prefix="WHERE" prefixOverrides="AND | OR" >
+      <if test="jobGroup !=null and jobGroup gt 0">
+        AND t.job_group = #{jobGroup}
+      </if>
+      <if test="triggerStatus !=null and triggerStatus  gte 0">
+        AND t.trigger_status = #{triggerStatus}
+      </if>
+      <if test="jobStatus !=null and jobStatus gte 0">
+        AND t.job_status = #{jobStatus}
+      </if>
+      <if test="glueType != null and glueType != ''">
+        AND t.glue_type =#{glueType}
+      </if>
+      <if test="id != null and id != ''">
+        AND t.id =#{id}
+      </if>
+    </trim>
+    ORDER BY t.gmt_create desc,id DESC
+  </select>
+
+  <select id="countJobByTriggerStatus" parameterType="java.util.HashMap" resultType="int">
+    SELECT count(1)
+    FROM xxl_job_info AS t
+    <where>
+      <if test="jobGroup !=null">
+        AND t.job_group = #{jobGroup}
+      </if>
+      <if test="triggerStatus !=null">
+        AND t.trigger_status = #{triggerStatus}
+      </if>
+    </where>
+  </select>
+	<update id="update" parameterType="com.smartcoding.schedule.core.model.XxlJobInfo" >
+		UPDATE xxl_job_info
+		SET
+			job_group = #{jobGroup},
+			job_cron = #{jobCron},
+			job_name = #{jobName},
+			update_time = NOW(),
+			author = #{author},
+			alarm_user_ids = #{alarmUserIds},
+			executor_route_strategy = #{executorRouteStrategy},
+			executor_handler = #{executorHandler},
+			executor_param = #{executorParam},
+			executor_block_strategy = #{executorBlockStrategy},
+			executor_timeout = ${executorTimeout},
+			executor_fail_retry_count = ${executorFailRetryCount},
+			glue_type = #{glueType},
+			glue_source = #{glueSource},
+			glue_remark = #{glueRemark},
+			glue_updatetime = #{glueUpdatetime},
+			child_job_id = #{childJobId},
+			trigger_status = #{triggerStatus},
+			trigger_last_time = #{triggerLastTime},
+			trigger_next_time = #{triggerNextTime}
+		WHERE id = #{id}
+	</update>
+
+
+	<select id="findAllCount" resultType="int">
+		SELECT count(1)
+		FROM xxl_job_info
+	</select>
+
+
+	<select id="scheduleJobQuery" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+		SELECT <include refid="Base_Column_List_2" />
+		FROM xxl_job_info AS t
+		WHERE t.trigger_status = 1 and t.trigger_next_time<![CDATA[ < ]]> #{maxNextTime}
+        ORDER BY id ASC
+        LIMIT #{pagesize}
+	</select>
+
+    <update id="scheduleUpdate" parameterType="com.smartcoding.schedule.core.model.XxlJobInfo"  >
+		UPDATE xxl_job_info
+		SET
+			trigger_last_time = #{triggerLastTime},
+			trigger_next_time = #{triggerNextTime},
+			trigger_status = #{triggerStatus}
+		WHERE id = #{id}
+	</update>
+  <select id="getXxlJobStatisticBO" resultType="com.smartcoding.schedule.core.model.bo.XxlJobStatisticBO">
+    select
+    count(1) as totalJobNum,
+    sum(if(trigger_status=1,1,0)) as enableJobNum,
+    sum(if(job_status=1,1,0)) as runningJobNum,
+    from  xxl_job_info
+  </select>
+  <select id="getXxlShortJobInfoBO" resultType="com.smartcoding.schedule.core.model.bo.XxlShortJobInfoBO">
+    select
+    id as id,
+    job_name as jobName,
+    executor_handler as executorHandler
+    from xxl_job_info
+    <where>
+      <if test="searchContent != null and searchContent != ''">
+         executor_handler like CONCAT(CONCAT(#{searchContent}), '%') or job_name like CONCAT(CONCAT(#{searchContent}), '%')
+      </if>
+    </where>
+    order by id desc
+    limit #{pageSize}
+  </select>
+  <select id="getXxlShortJobInfoBOByNextExecute" resultType="com.smartcoding.schedule.core.model.bo.XxlShortJobInfoBO">
+    select
+    id as id,
+    job_name as jobName,
+    executor_handler as executorHandler,
+    trigger_next_time as triggerNextTime
+    from xxl_job_info
+    where trigger_status=1 and trigger_next_time>0 and trigger_next_time   <![CDATA[<=  ]]>#{endSecondsMilli} and trigger_next_time >=#{startSecondsMilli}
+    order by trigger_next_time asc
+    limit 50
+  </select>
+  <select id="getXxlJobInfo" parameterType="java.util.HashMap" resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List_2" />
+    FROM xxl_job_info AS t
+    WHERE t.job_group = #{jobGroup} and t.executor_handler=#{executorHandler}
+  </select>
+  <select id="selectJobInfoByIdList" resultType="com.smartcoding.schedule.core.model.bo.XxlShortJobInfoBO">
+        select
+    id as id,
+    job_name as jobName,
+    executor_handler as executorHandler
+    from xxl_job_info where  id in
+    <foreach item="id" collection="idList" open="(" separator="," close=")">
+      #{id}
+    </foreach>
+  </select>
+    <update id="updateJobStatus" parameterType="com.smartcoding.schedule.core.model.XxlJobInfo">
+  update xxl_job_info
+  set
+  job_status = #{jobStatus,jdbcType=TINYINT},
+  last_job_log_id = #{lastJobLogId,jdbcType=BIGINT},
+  last_trigger_code = #{lastTriggerCode,jdbcType=INTEGER},
+  last_trigger_time = #{lastTriggerTime,jdbcType=TIMESTAMP},
+  last_handle_code = #{lastHandleCode,jdbcType=INTEGER},
+  last_handle_time = #{lastHandleTime,jdbcType=TIMESTAMP}
+  where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

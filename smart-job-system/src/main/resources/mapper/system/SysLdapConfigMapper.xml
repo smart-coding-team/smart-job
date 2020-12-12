@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smartcoding.system.mapper.SysLdapConfigMapper">
+
+    <resultMap id="baseResult" type="com.smartcoding.system.domain.SysLdapConfig">
+        <result column="id" property="id"/>
+        <result column="enabled" property="enabled"/>
+        <result column="enableSsl" property="enableSsl"/>
+        <result column="urls" property="urls"/>
+        <result column="base" property="base"/>
+        <result column="manager_dn" property="managerDn"/>
+        <result column="manager_password" property="managerPassword"/>
+        <result column="user_dn_patterns" property="userDnPatterns"/>
+        <result column="attributes_mail" property="attributesMail"/>
+        <result column="attributes_telephone" property="attributesTelephone"/>
+        <result column="update_by" property="updateBy"/>
+        <result column="remark" property="remark"/>
+        <result column="gmt_create" property="gmtCreate"/>
+        <result column="gmt_modified" property="gmtModified"/>
+    </resultMap>
+    <sql id="baseColumn">
+        id, enabled, urls,enableSsl, base, manager_dn, manager_password, user_dn_patterns,attributes_mail, attributes_telephone,remark, gmt_create, gmt_modified
+    </sql>
+    <insert id="insert">
+        insert into sys_ldap_config(
+        <if test="enabled != null and enabled != ''">enabled ,</if>
+        <if test="enableSsl != null and enableSsl != ''">enableSsl,</if>
+        <if test="urls != null and urls != ''">urls,</if>
+        <if test="base != null and base != ''">base,</if>
+        <if test="userDnPatterns != null and userDnPatterns != ''">user_dn_patterns ,</if>
+        <if test="managerDn != null and managerDn != ''">manager_dn ,</if>
+        <if test="managerPassword != null and managerPassword != ''">manager_password ,</if>
+        <if test="attributesMail != null and attributesMail != ''">attributes_mail ,</if>
+        <if test="attributesTelephone != null and attributesTelephone != ''">attributes_telephone ,</if>
+        <if test="updateBy != null and updateBy != ''">update_by ,</if>
+        <if test="remark != null">remark</if>
+        )values(
+        <if test="enabled != null">#{enabled},</if>
+        <if test="enableSsl != null and enableSsl != ''">#{enableSsl},</if>
+        <if test="urls != null and urls != ''">#{urls},</if>
+        <if test="base != null and base != ''">#{base},</if>
+        <if test="userDnPatterns != null and userDnPatterns != ''"> #{userDnPatterns},</if>
+        <if test="managerDn != null and managerDn != ''">  #{managerDn},</if>
+        <if test="managerPassword != null and managerPassword != ''">  #{managerPassword},</if>
+        <if test="attributesMail != null and attributesMail != ''">  #{attributesMail},</if>
+        <if test="attributesTelephone != null and attributesTelephone != ''">  #{attributesTelephone},</if>
+        <if test="updateBy != null and updateBy != ''">  #{updateBy},</if>
+        <if test="remark != null">  #{remark}</if>
+        )
+    </insert>
+    <update id="update" parameterType="com.smartcoding.system.domain.SysConfig">
+        update sys_ldap_config
+        <set>
+            <if test="enabled != null and enabled != ''">enabled = #{enabled},</if>
+            <if test="enableSsl != null and enableSsl != ''">enableSsl = #{enableSsl},</if>
+            <if test="urls != null and urls != ''">urls = #{urls},</if>
+            <if test="base != null and base != ''">base = #{base},</if>
+            <if test="userDnPatterns != null and userDnPatterns != ''">user_dn_patterns = #{userDnPatterns},</if>
+            <if test="managerDn != null and managerDn != ''">manager_dn = #{managerDn},</if>
+            <if test="managerPassword != null and managerPassword != ''">manager_password = #{managerPassword},</if>
+            <if test="attributesMail != null and attributesMail != ''">attributes_mail = #{attributesMail},</if>
+            <if test="attributesTelephone != null and attributesTelephone != ''">attributes_telephone = #{attributesTelephone},</if>
+            <if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
+            <if test="remark != null">remark = #{remark}</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <select id="getSysDapConfig" resultMap="baseResult">
+        select
+        <include refid="baseColumn"/>
+        from sys_ldap_config limit 1
+    </select>
+
+</mapper>

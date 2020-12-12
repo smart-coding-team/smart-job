@@ -1,0 +1,2 @@
+Application Version: ${smart-job.version}
+Spring Boot Version: ${spring-boot.version}

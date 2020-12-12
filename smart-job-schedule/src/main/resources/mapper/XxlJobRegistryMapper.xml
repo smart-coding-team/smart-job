@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smartcoding.schedule.mapper.XxlJobRegistryMapper">
+  <resultMap id="BaseResultMap" type="com.smartcoding.schedule.core.model.XxlJobRegistry">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="registry_group" jdbcType="VARCHAR" property="registryGroup" />
+    <result column="registry_key" jdbcType="VARCHAR" property="registryKey" />
+    <result column="registry_value" jdbcType="VARCHAR" property="registryValue" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, registry_group, registry_key, registry_value, update_time, gmt_create, gmt_modified
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from xxl_job_registry
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from xxl_job_registry
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.smartcoding.schedule.core.model.XxlJobRegistry">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into xxl_job_registry (registry_group, registry_key, registry_value,
+      update_time, gmt_create, gmt_modified
+      )
+    values (#{registryGroup,jdbcType=VARCHAR}, #{registryKey,jdbcType=VARCHAR}, #{registryValue,jdbcType=VARCHAR},
+      #{updateTime,jdbcType=TIMESTAMP}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.smartcoding.schedule.core.model.XxlJobRegistry">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into xxl_job_registry
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="registryGroup != null">
+        registry_group,
+      </if>
+      <if test="registryKey != null">
+        registry_key,
+      </if>
+      <if test="registryValue != null">
+        registry_value,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create,
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="registryGroup != null">
+        #{registryGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="registryKey != null">
+        #{registryKey,jdbcType=VARCHAR},
+      </if>
+      <if test="registryValue != null">
+        #{registryValue,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtCreate != null">
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.smartcoding.schedule.core.model.XxlJobRegistry">
+    update xxl_job_registry
+    <set>
+      <if test="registryGroup != null">
+        registry_group = #{registryGroup,jdbcType=VARCHAR},
+      </if>
+      <if test="registryKey != null">
+        registry_key = #{registryKey,jdbcType=VARCHAR},
+      </if>
+      <if test="registryValue != null">
+        registry_value = #{registryValue,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.smartcoding.schedule.core.model.XxlJobRegistry">
+    update xxl_job_registry
+    set registry_group = #{registryGroup,jdbcType=VARCHAR},
+      registry_key = #{registryKey,jdbcType=VARCHAR},
+      registry_value = #{registryValue,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+	<!--==========================================手动添加sql语句开始分割线========================================-->
+	<sql id="Base_Column_List_2">
+		t.id,
+		t.registry_group,
+		t.registry_key,
+		t.registry_value,
+		t.update_time,
+        t.gmt_create,
+		t.gmt_modified
+	</sql>
+
+  <select id="findDead" parameterType="java.lang.Integer" resultType="java.lang.Integer" >
+		SELECT t.id
+		FROM xxl_job_registry AS t
+		WHERE t.update_time <![CDATA[ < ]]> DATE_ADD(NOW(),INTERVAL -#{timeout} SECOND)
+	</select>
+
+  <delete id="removeDead" parameterType="java.lang.Integer" >
+    DELETE FROM xxl_job_registry
+    WHERE id in
+    <foreach collection="ids" item="item" open="(" close=")" separator="," >
+      #{item}
+    </foreach>
+  </delete>
+
+	<select id="findAll" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		SELECT <include refid="Base_Column_List_2" />
+		FROM xxl_job_registry AS t
+		WHERE t.update_time <![CDATA[ > ]]> DATE_ADD(NOW(),INTERVAL -#{timeout} SECOND)
+	</select>
+  <select id="findByRegistryGroup"  resultMap="BaseResultMap">
+    SELECT <include refid="Base_Column_List_2" />
+    FROM xxl_job_registry AS t
+    WHERE t.registry_group= #{registryGroup} and  t.update_time <![CDATA[ > ]]> DATE_ADD(NOW(),INTERVAL -#{timeout} SECOND)
+  </select>
+  <update id="registryUpdate" >
+        UPDATE xxl_job_registry
+        SET `update_time` = NOW()
+        WHERE `registry_group` = #{registryGroup}
+          AND `registry_key` = #{registryKey}
+          AND `registry_value` = #{registryValue}
+    </update>
+
+    <insert id="registrySave" >
+        INSERT INTO xxl_job_registry( `registry_group` , `registry_key` , `registry_value`, `update_time`)
+        VALUES( #{registryGroup}  , #{registryKey} , #{registryValue}, NOW())
+    </insert>
+
+	<delete id="registryDelete" >
+		DELETE FROM xxl_job_registry
+		WHERE registry_group = #{registryGroup}
+			AND registry_key = #{registryKey}
+			AND registry_value = #{registryValue}
+	</delete>
+  <select id="getOnLineAddressList" resultType="java.lang.String">
+    select registry_value from xxl_job_registry
+    WHERE registry_group = #{registryGroup}
+			AND registry_key = #{registryKey}
+			AND registry_value in
+    <foreach collection="registryValueList" open="(" separator="," close=")" item="item">
+            #{item}
+  </foreach>
+  </select>
+  <select id="getXxlJobRegistryList" resultMap="BaseResultMap">
+    select  <include refid="Base_Column_List" /> from xxl_job_registry
+    WHERE registry_group = #{registryGroup}
+    AND registry_key = #{registryKey}
+    AND registry_value in
+    <foreach collection="registryValueList" open="(" separator="," close=")" item="item">
+      #{item}
+    </foreach>
+  </select>
+</mapper>

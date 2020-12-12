@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smartcoding.schedule.mapper.XxlJobGroupMapper">
+  <resultMap id="BaseResultMap" type="com.smartcoding.schedule.core.model.XxlJobGroup">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="app_name" jdbcType="VARCHAR" property="appName" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="order" jdbcType="INTEGER" property="order" />
+    <result column="address_type" jdbcType="TINYINT" property="addressType" />
+    <result column="address_list" jdbcType="VARCHAR" property="addressList" />
+    <result column="alarm_status" jdbcType="TINYINT" property="alarmStatus" />
+    <result column="alarm_ids" jdbcType="VARCHAR" property="alarmIds" />
+    <result column="client_version" jdbcType="VARCHAR" property="clientVersion" />
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, app_name, title, `order`, address_type, address_list, alarm_status, alarm_ids,client_version,
+    gmt_create, gmt_modified
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from xxl_job_group
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from xxl_job_group
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.smartcoding.schedule.core.model.XxlJobGroup">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into xxl_job_group (app_name, title, `order`,
+      address_type, address_list, alarm_status,
+      alarm_ids, gmt_create, gmt_modified
+      )
+    values (#{appName,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{order,jdbcType=INTEGER},
+      #{addressType,jdbcType=TINYINT}, #{addressList,jdbcType=VARCHAR}, #{alarmStatus,jdbcType=TINYINT},
+      #{alarmIds,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.smartcoding.schedule.core.model.XxlJobGroup">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into xxl_job_group
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="appName != null">
+        app_name,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+     <if test="clientVersion != null">
+         client_version,
+      </if>
+      <if test="order != null">
+        `order`,
+      </if>
+      <if test="addressType != null">
+        address_type,
+      </if>
+      <if test="addressList != null">
+        address_list,
+      </if>
+      <if test="alarmStatus != null">
+        alarm_status,
+      </if>
+      <if test="alarmIds != null">
+        alarm_ids,
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create,
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="appName != null">
+        #{appName,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+        <if test="clientVersion != null">
+            #{clientVersion,jdbcType=VARCHAR},
+        </if>
+      <if test="order != null">
+        #{order,jdbcType=INTEGER},
+      </if>
+      <if test="addressType != null">
+        #{addressType,jdbcType=TINYINT},
+      </if>
+      <if test="addressList != null">
+        #{addressList,jdbcType=VARCHAR},
+      </if>
+      <if test="alarmStatus != null">
+        #{alarmStatus,jdbcType=TINYINT},
+      </if>
+      <if test="alarmIds != null">
+        #{alarmIds,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtCreate != null">
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.smartcoding.schedule.core.model.XxlJobGroup">
+    update xxl_job_group
+    <set>
+      <if test="appName != null">
+        app_name = #{appName,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+        <if test="clientVersion != null">
+            client_version = #{clientVersion,jdbcType=VARCHAR},
+        </if>
+      <if test="order != null">
+        `order` = #{order,jdbcType=INTEGER},
+      </if>
+      <if test="addressType != null">
+        address_type = #{addressType,jdbcType=TINYINT},
+      </if>
+      <if test="addressList != null">
+        address_list = #{addressList,jdbcType=VARCHAR},
+      </if>
+      <if test="alarmStatus != null">
+        alarm_status = #{alarmStatus,jdbcType=TINYINT},
+      </if>
+      <if test="alarmIds != null">
+        alarm_ids = #{alarmIds,jdbcType=VARCHAR},
+      </if>
+      <if test="gmtCreate != null">
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.smartcoding.schedule.core.model.XxlJobGroup">
+    update xxl_job_group
+    set app_name = #{appName,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      `order` = #{order,jdbcType=INTEGER},
+      address_type = #{addressType,jdbcType=TINYINT},
+      address_list = #{addressList,jdbcType=VARCHAR},
+      alarm_status = #{alarmStatus,jdbcType=TINYINT},
+      alarm_ids = #{alarmIds,jdbcType=VARCHAR},
+      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+	<!--==========================================手动添加sql语句开始分割线========================================-->
+	<sql id="Base_Column_List_2">
+		t.id,
+		t.app_name,
+		t.title,
+		t.client_version,
+		t.`order`,
+		t.address_type,
+		t.address_list,
+		t.alarm_status,
+		t.alarm_ids,
+        t.gmt_create,
+		t.gmt_modified
+	</sql>
+	<resultMap id="BaseResultMapBO" type="com.smartcoding.schedule.core.model.vo.JobGroupVO" extends="BaseResultMap">
+	</resultMap>
+	<select id="findAll" resultMap="BaseResultMap">
+		SELECT <include refid="Base_Column_List_2" />
+		FROM xxl_job_group AS t
+		ORDER BY t.order ASC
+	</select>
+	<select id="findAllBO" resultMap="BaseResultMapBO">
+		SELECT <include refid="Base_Column_List_2" />
+		FROM xxl_job_group AS t
+		ORDER BY t.order ASC
+	</select>
+	<select id="findByAddressType" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		SELECT <include refid="Base_Column_List_2" />
+		FROM xxl_job_group AS t
+		WHERE t.address_type = #{addressType}
+		ORDER BY t.order ASC
+	</select>
+    <update id="update" parameterType="com.smartcoding.schedule.core.model.XxlJobGroup" >
+		UPDATE xxl_job_group
+		SET `app_name` = #{appName},
+			`title` = #{title},
+			`order` = #{order},
+			`address_type` = #{addressType},
+			`alarm_status` = #{alarmStatus},
+			`address_list` = #{addressList},
+			`alarm_ids` = #{alarmIds}
+		WHERE id = #{id}
+	</update>
+	<select id="pageList" resultMap="BaseResultMapBO">
+		SELECT <include refid="Base_Column_List" />
+		FROM xxl_job_group
+		<trim prefix="WHERE" prefixOverrides="AND | OR" >
+			<if test="appName != null and appName != ''">
+				AND app_name like CONCAT(CONCAT('%', #{appName}), '%')
+			</if>
+		</trim>
+		ORDER BY gmt_create desc,id DESC
+		LIMIT #{offset}, #{pagesize}
+	</select>
+    <select id="getList" resultMap="BaseResultMapBO">
+        SELECT <include refid="Base_Column_List" />
+        FROM xxl_job_group
+        <trim prefix="WHERE" prefixOverrides="AND | OR" >
+            <if test="id != null and id >0 ">
+                AND id=#{id}
+            </if>
+            <if test="addressType != null and addressType >-1 ">
+                AND address_type=#{addressType}
+            </if>
+            <if test="alarmStatus != null and alarmStatus >-1 ">
+                AND alarm_status=#{alarmStatus}
+            </if>
+        </trim>
+        ORDER BY gmt_create desc,id DESC
+
+    </select>
+	<select id="pageListCount" resultType="Integer">
+		SELECT count(1)
+		FROM xxl_job_group
+		<trim prefix="WHERE" prefixOverrides="AND | OR" >
+			<if test="appName != null and appName != ''">
+				AND app_name like CONCAT(CONCAT('%', #{appName}), '%')
+			</if>
+		</trim>
+	</select>
+  <select id="selectByAppName" resultMap="BaseResultMap">
+      SELECT <include refid="Base_Column_List" />
+      FROM xxl_job_group where app_name = #{appName,jdbcType=VARCHAR}
+  </select>
+    <select id="querySearch" resultMap="BaseResultMap">
+        SELECT <include refid="Base_Column_List" />
+        FROM xxl_job_group
+        <trim prefix="WHERE" prefixOverrides="AND | OR" >
+            <if test="title != null and title != ''">
+                AND title like CONCAT(CONCAT('%', #{title}), '%')
+            </if>
+        </trim>
+        ORDER BY gmt_create desc,id DESC
+        limit #{pageSize}
+    </select>
+    <select id="count" resultType="java.lang.Integer">
+        select count(*) from xxl_job_group
+    </select>
+</mapper>

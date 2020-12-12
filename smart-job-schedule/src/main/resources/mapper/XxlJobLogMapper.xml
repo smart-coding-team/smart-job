@@ -1,0 +1,449 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smartcoding.schedule.mapper.XxlJobLogMapper">
+
+    <resultMap id="BaseResultMap" type="com.smartcoding.schedule.core.model.XxlJobLog">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="job_request_id" jdbcType="VARCHAR" property="jobRequestId"/>
+        <result column="job_name" jdbcType="VARCHAR" property="jobName"/>
+        <result column="job_group" jdbcType="BIGINT" property="jobGroup"/>
+        <result column="job_id" jdbcType="BIGINT" property="jobId"/>
+        <result column="job_status" jdbcType="INTEGER" property="jobStatus"/>
+        <result column="executor_address" jdbcType="VARCHAR" property="executorAddress"/>
+        <result column="executor_handler" jdbcType="VARCHAR" property="executorHandler"/>
+        <result column="executor_param" jdbcType="VARCHAR" property="executorParam"/>
+        <result column="executor_sharding_param" jdbcType="VARCHAR" property="executorShardingParam"/>
+        <result column="executor_fail_retry_count" jdbcType="INTEGER" property="executorFailRetryCount"/>
+        <result column="trigger_type" jdbcType="INTEGER" property="triggerType"/>
+        <result column="trigger_address" jdbcType="VARCHAR" property="triggerAddress"/>
+        <result column="trigger_time" jdbcType="TIMESTAMP" property="triggerTime"/>
+        <result column="trigger_code" jdbcType="INTEGER" property="triggerCode"/>
+        <result column="handle_time" jdbcType="TIMESTAMP" property="handleTime"/>
+        <result column="handle_code" jdbcType="INTEGER" property="handleCode"/>
+        <result column="alarm_status" jdbcType="TINYINT" property="alarmStatus"/>
+        <result column="trigger_msg" jdbcType="LONGVARCHAR" property="triggerMsg"/>
+        <result column="handle_msg" jdbcType="LONGVARCHAR" property="handleMsg"/>
+        <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate"/>
+        <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    id, job_request_id, job_name, job_group, job_id,job_status, executor_address, executor_handler,
+    executor_param, executor_sharding_param, executor_fail_retry_count,trigger_type, trigger_time,trigger_address,
+    trigger_code, handle_time, handle_code, alarm_status, gmt_create, gmt_modified
+  </sql>
+    <sql id="Blob_Column_List">
+    trigger_msg, handle_msg
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from xxl_job_log
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from xxl_job_log
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.smartcoding.schedule.core.model.XxlJobLog">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into xxl_job_log (job_request_id, job_name, job_group,
+        job_id, executor_address, executor_handler,
+        executor_param, executor_sharding_param, executor_fail_retry_count,
+        trigger_time, trigger_code, handle_time,
+        handle_code, alarm_status, gmt_create,
+        gmt_modified, trigger_msg, handle_msg
+        )
+        values (#{jobRequestId,jdbcType=VARCHAR}, #{jobName,jdbcType=VARCHAR}, #{jobGroup,jdbcType=BIGINT},
+        #{jobId,jdbcType=BIGINT}, #{executorAddress,jdbcType=VARCHAR}, #{executorHandler,jdbcType=VARCHAR},
+        #{executorParam,jdbcType=VARCHAR}, #{executorShardingParam,jdbcType=VARCHAR},
+        #{executorFailRetryCount,jdbcType=INTEGER},
+        #{triggerTime,jdbcType=TIMESTAMP}, #{triggerCode,jdbcType=INTEGER}, #{handleTime,jdbcType=TIMESTAMP},
+        #{handleCode,jdbcType=INTEGER}, #{alarmStatus,jdbcType=TINYINT}, #{gmtCreate,jdbcType=TIMESTAMP},
+        #{gmtModified,jdbcType=TIMESTAMP}, #{triggerMsg,jdbcType=LONGVARCHAR}, #{handleMsg,jdbcType=LONGVARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.smartcoding.schedule.core.model.XxlJobLog">
+        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into xxl_job_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="jobRequestId != null">
+                job_request_id,
+            </if>
+            <if test="jobName != null">
+                job_name,
+            </if>
+            <if test="jobGroup != null">
+                job_group,
+            </if>
+            <if test="jobId != null">
+                job_id,
+            </if>
+            <if test="jobStatus != null">
+                job_status,
+            </if>
+            <if test="executorAddress != null">
+                executor_address,
+            </if>
+            <if test="executorHandler != null">
+                executor_handler,
+            </if>
+            <if test="executorParam != null">
+                executor_param,
+            </if>
+            <if test="executorShardingParam != null">
+                executor_sharding_param,
+            </if>
+            <if test="executorFailRetryCount != null">
+                executor_fail_retry_count,
+            </if>
+            <if test="triggerType != null">
+                trigger_type,
+            </if>
+            <if test="triggerAddress != null">
+                trigger_address,
+            </if>
+            <if test="triggerTime != null">
+                trigger_time,
+            </if>
+            <if test="triggerCode != null">
+                trigger_code,
+            </if>
+            <if test="handleTime != null">
+                handle_time,
+            </if>
+            <if test="handleCode != null">
+                handle_code,
+            </if>
+            <if test="alarmStatus != null">
+                alarm_status,
+            </if>
+            <if test="gmtCreate != null">
+                gmt_create,
+            </if>
+            <if test="gmtModified != null">
+                gmt_modified,
+            </if>
+            <if test="triggerMsg != null">
+                trigger_msg,
+            </if>
+            <if test="handleMsg != null">
+                handle_msg,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="jobRequestId != null">
+                #{jobRequestId,jdbcType=VARCHAR},
+            </if>
+            <if test="jobName != null">
+                #{jobName,jdbcType=VARCHAR},
+            </if>
+            <if test="jobGroup != null">
+                #{jobGroup,jdbcType=BIGINT},
+            </if>
+            <if test="jobId != null">
+                #{jobId,jdbcType=BIGINT},
+            </if>
+            <if test="jobStatus != null">
+                #{jobStatus,jdbcType=INTEGER},
+            </if>
+            <if test="executorAddress != null">
+                #{executorAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="executorHandler != null">
+                #{executorHandler,jdbcType=VARCHAR},
+            </if>
+            <if test="executorParam != null">
+                #{executorParam,jdbcType=VARCHAR},
+            </if>
+            <if test="executorShardingParam != null">
+                #{executorShardingParam,jdbcType=VARCHAR},
+            </if>
+            <if test="executorFailRetryCount != null">
+                #{executorFailRetryCount,jdbcType=INTEGER},
+            </if>
+            <if test="triggerType != null">
+                #{triggerType,jdbcType=INTEGER},
+            </if>
+            <if test="triggerAddress != null">
+                #{triggerAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="triggerTime != null">
+                #{triggerTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="triggerCode != null">
+                #{triggerCode,jdbcType=INTEGER},
+            </if>
+            <if test="handleTime != null">
+                #{handleTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="handleCode != null">
+                #{handleCode,jdbcType=INTEGER},
+            </if>
+            <if test="alarmStatus != null">
+                #{alarmStatus,jdbcType=TINYINT},
+            </if>
+            <if test="gmtCreate != null">
+                #{gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmtModified != null">
+                #{gmtModified,jdbcType=TIMESTAMP},
+            </if>
+            <if test="triggerMsg != null">
+                #{triggerMsg,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="handleMsg != null">
+                #{handleMsg,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.smartcoding.schedule.core.model.XxlJobLog">
+        update xxl_job_log
+        <set>
+            <if test="jobRequestId != null">
+                job_request_id = #{jobRequestId,jdbcType=VARCHAR},
+            </if>
+            <if test="jobName != null">
+                job_name = #{jobName,jdbcType=VARCHAR},
+            </if>
+            <if test="jobGroup != null">
+                job_group = #{jobGroup,jdbcType=BIGINT},
+            </if>
+            <if test="jobId != null">
+                job_id = #{jobId,jdbcType=BIGINT},
+            </if>
+            <if test="jobStatus != null">
+                job_status = #{jobStatus,jdbcType=INTEGER},
+            </if>
+            <if test="executorAddress != null">
+                executor_address = #{executorAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="executorHandler != null">
+                executor_handler = #{executorHandler,jdbcType=VARCHAR},
+            </if>
+            <if test="executorParam != null">
+                executor_param = #{executorParam,jdbcType=VARCHAR},
+            </if>
+            <if test="executorShardingParam != null">
+                executor_sharding_param = #{executorShardingParam,jdbcType=VARCHAR},
+            </if>
+            <if test="executorFailRetryCount != null">
+                executor_fail_retry_count = #{executorFailRetryCount,jdbcType=INTEGER},
+            </if>
+            <if test="triggerTime != null">
+                trigger_time = #{triggerTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="triggerCode != null">
+                trigger_code = #{triggerCode,jdbcType=INTEGER},
+            </if>
+            <if test="handleTime != null">
+                handle_time = #{handleTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="handleCode != null">
+                handle_code = #{handleCode,jdbcType=INTEGER},
+            </if>
+            <if test="alarmStatus != null">
+                alarm_status = #{alarmStatus,jdbcType=TINYINT},
+            </if>
+            <if test="gmtCreate != null">
+                gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="gmtModified != null">
+                gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+            </if>
+            <if test="triggerMsg != null">
+                trigger_msg = #{triggerMsg,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="handleMsg != null">
+                handle_msg = #{handleMsg,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.smartcoding.schedule.core.model.XxlJobLog">
+    update xxl_job_log
+    set job_request_id = #{jobRequestId,jdbcType=VARCHAR},
+      job_name = #{jobName,jdbcType=VARCHAR},
+      job_group = #{jobGroup,jdbcType=BIGINT},
+      job_id = #{jobId,jdbcType=BIGINT},
+      executor_address = #{executorAddress,jdbcType=VARCHAR},
+      executor_handler = #{executorHandler,jdbcType=VARCHAR},
+      executor_param = #{executorParam,jdbcType=VARCHAR},
+      executor_sharding_param = #{executorShardingParam,jdbcType=VARCHAR},
+      executor_fail_retry_count = #{executorFailRetryCount,jdbcType=INTEGER},
+      trigger_time = #{triggerTime,jdbcType=TIMESTAMP},
+      trigger_code = #{triggerCode,jdbcType=INTEGER},
+      handle_time = #{handleTime,jdbcType=TIMESTAMP},
+      handle_code = #{handleCode,jdbcType=INTEGER},
+      alarm_status = #{alarmStatus,jdbcType=TINYINT},
+      gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+
+  </update>
+    <!--==========================================手动添加sql语句开始分割线========================================-->
+    <sql id="Base_Column_List_2">
+		t.id,
+		t.job_group,
+		t.job_id,
+		t.job_name,
+		t.job_request_id,
+		t.job_status,
+		t.executor_address,
+		t.executor_handler,
+		t.executor_param,
+		t.executor_sharding_param,
+		t.executor_fail_retry_count,
+		t.trigger_type,
+		t.trigger_address,
+		t.trigger_time,
+		t.trigger_code,
+		t.trigger_msg,
+		t.handle_time,
+		t.handle_code,
+		t.handle_msg,
+		t.alarm_status,
+        t.gmt_create,
+		t.gmt_modified
+	</sql>
+
+    <select id="getJobLogList" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List_2"/>
+        FROM xxl_job_log AS t
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test=" id !=null and id gt 0">
+                 t.id = #{id}
+            </if>
+            <if test=" jobGroup !=null and jobGroup gt 0">
+                AND t.job_group = #{jobGroup}
+            </if>
+            <if test="jobId !=null and jobId gt 0">
+                AND t.job_id = #{jobId}
+            </if>
+            <if test="jobStatus !=null and jobStatus gt -1">
+                AND t.job_status = #{jobStatus}
+            </if>
+            <if test="triggerTimeStart != null">
+                AND t.trigger_time <![CDATA[ >= ]]> #{triggerTimeStart}
+            </if>
+            <if test="triggerTimeEnd != null">
+                AND t.trigger_time <![CDATA[ <= ]]> #{triggerTimeEnd}
+            </if>
+        </trim>
+        ORDER BY t.trigger_time DESC
+    </select>
+
+
+    <delete id="delete">
+		delete from xxl_job_log
+		WHERE job_id = #{jobId}
+	</delete>
+
+
+    <select id="triggerCountByDay" resultType="com.smartcoding.schedule.core.model.bo.XxlJobLogReportBO">
+		SELECT
+			COUNT(handle_code) triggerDayCount,
+			SUM(CASE WHEN (trigger_code in (0, 200) and handle_code = 0) then 1 else 0 end) as triggerDayCountRunning,
+			SUM(CASE WHEN handle_code = 200 then 1 else 0 end) as triggerDayCountSuc
+		FROM xxl_job_log
+		WHERE trigger_time <![CDATA[ >= ]]> #{from} and trigger_time <![CDATA[ <= ]]> #{to}
+    </select>
+
+    <delete id="clearLogBeforeTime">
+        delete from xxl_job_log
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            trigger_time <![CDATA[ <= ]]> #{clearBeforeTime}
+            <if test="jobGroup gt 0">
+                AND job_group = #{jobGroup}
+            </if>
+            <if test="jobId gt 0">
+                AND job_id = #{jobId}
+            </if>
+        </trim>
+    </delete>
+    <delete id="clearLogByBeforeNum">
+        delete from xxl_job_log
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="jobGroup gt 0">
+                AND job_group = #{jobGroup}
+            </if>
+            <if test="jobId gt 0">
+                AND job_id = #{jobId}
+            </if>
+        </trim>
+        order by id asc
+        limit #{clearBeforeNum}
+    </delete>
+    <delete id="clearLogAll">
+        delete from xxl_job_log
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="jobGroup gt 0">
+                AND job_group = #{jobGroup}
+            </if>
+            <if test="jobId gt 0">
+                AND job_id = #{jobId}
+            </if>
+        </trim>
+    </delete>
+    <select id="findTriggerFailJobLogIds" resultType="Long">
+		SELECT id FROM `xxl_job_log`
+		WHERE trigger_code =500
+		AND `alarm_status` = 0
+		ORDER BY id ASC
+	</select>
+    <select id="findHandleFailJobLogIds" resultType="Long">
+	SELECT id FROM `xxl_job_log`
+	WHERE handle_code =500
+	AND `alarm_status` = 0
+	ORDER BY id ASC
+	</select>
+    <update id="updateAlarmStatus">
+		UPDATE xxl_job_log
+		SET
+			`alarm_status` = #{newAlarmStatus}
+		WHERE `id`= #{logId} AND `alarm_status` = #{oldAlarmStatus}
+	</update>
+
+    <select id="countXxlJobLog" resultType="java.lang.Integer">
+		select count(*) from xxl_job_log where gmt_create <![CDATA[ < ]]> #{now}
+	</select>
+    <resultMap id="BaseResultMap2" type="com.smartcoding.schedule.core.model.XxlJobLog" extends="BaseResultMap">
+        <result column="trigger_msg" jdbcType="VARCHAR" property="triggerMsg"/>
+        <result column="handle_msg" jdbcType="VARCHAR" property="handleMsg"/>
+    </resultMap>
+    <select id="getXxlJobLogListByGmtCreate" resultType="java.lang.Long">
+		SELECT id from  xxl_job_log  where gmt_create <![CDATA[ < ]]> #{now}
+		order by id asc
+		 limit #{pageSize}
+	</select>
+    <update id="updateJobStatusByHandleCode">
+        update xxl_job_log
+        set  handle_code=#{handleCode},
+        job_status=(case
+        when  trigger_code+#{handleCode}<![CDATA[ < ]]>0 then 0
+        when  trigger_code+#{handleCode}>=0 and trigger_code+#{handleCode} <![CDATA[ < ]]>400 then 1
+        when  trigger_code+#{handleCode}=400 then 200
+        when  trigger_code+#{handleCode}>400 then 500
+        end)
+        where id=#{id}
+    </update>
+    <update id="updateJobStatusByTriggerCode">
+        update xxl_job_log
+        set  trigger_code=#{triggerCode},
+        job_status=(case
+        when  handle_code+#{triggerCode}<![CDATA[ < ]]>0 then 0
+        when  handle_code+#{triggerCode}>=0 and handle_code+#{triggerCode} <![CDATA[ < ]]>400 then 1
+        when  handle_code+#{triggerCode}=400 then 200
+        when  handle_code+#{triggerCode}>400 then 500
+        end)
+        where id=#{id}
+    </update>
+</mapper>

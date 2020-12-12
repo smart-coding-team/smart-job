@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smartcoding.schedule.mapper.XxlJobScheduleConfigMapper">
+
+    <resultMap type="com.smartcoding.schedule.core.model.XxlJobScheduleConfig" id="XxlJobScheduleConfigResult">
+        <result column="id" property="id"/>
+        <result column="config_key" property="configKey"/>
+        <result column="config_value" property="configValue"/>
+        <result column="config_Status" property="configStatus"/>
+        <result column="create_by" property="createBy"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_by" property="updateBy"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="gmt_create" property="gmtCreate"/>
+        <result column="gmt_modified" property="gmtModified"/>
+    </resultMap>
+
+    <sql id="selectXxlJobScheduleConfigVo">
+        select id, config_key, config_value, config_Status, create_by, create_time, update_by, update_time, gmt_create, gmt_modified from xxl_job_schedule_config
+    </sql>
+
+    <select id="selectXxlJobScheduleConfigList" parameterType="com.smartcoding.schedule.core.model.XxlJobScheduleConfig"
+            resultMap="XxlJobScheduleConfigResult">
+        <include refid="selectXxlJobScheduleConfigVo"/>
+        <where>
+            <if test="configKey != null  and configKey != ''">and config_key = #{configKey}</if>
+            <if test="configStatus != null ">and config_Status = #{configStatus}</if>
+        </where>
+    </select>
+
+    <select id="selectXxlJobScheduleConfigById" parameterType="Long" resultMap="XxlJobScheduleConfigResult">
+        <include refid="selectXxlJobScheduleConfigVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertXxlJobScheduleConfig" parameterType="com.smartcoding.schedule.core.model.XxlJobScheduleConfig"
+            useGeneratedKeys="true" keyProperty="id">
+        insert into xxl_job_schedule_config
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="configKey != null and configKey != ''">config_key,</if>
+            <if test="configValue != null">config_value,</if>
+            <if test="configStatus != null">config_Status,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="gmtCreate != null">gmt_create,</if>
+            <if test="gmtModified != null">gmt_modified,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="configKey != null and configKey != ''">#{configKey},</if>
+            <if test="configValue != null">#{configValue},</if>
+            <if test="configStatus != null">#{configStatus},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="gmtCreate != null">#{gmtCreate},</if>
+            <if test="gmtModified != null">#{gmtModified},</if>
+        </trim>
+    </insert>
+
+    <update id="updateXxlJobScheduleConfig" parameterType="com.smartcoding.schedule.core.model.XxlJobScheduleConfig">
+        update xxl_job_schedule_config
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="configKey != null and configKey != ''">config_key = #{configKey},</if>
+            <if test="configValue != null">config_value = #{configValue},</if>
+            <if test="configStatus != null">config_Status = #{configStatus},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="gmtCreate != null">gmt_create = #{gmtCreate},</if>
+            <if test="gmtModified != null">gmt_modified = #{gmtModified},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXxlJobScheduleConfigById" parameterType="Long">
+        delete from xxl_job_schedule_config where id = #{id}
+    </delete>
+
+    <delete id="deleteXxlJobScheduleConfigByIds" parameterType="String">
+        delete from xxl_job_schedule_config where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

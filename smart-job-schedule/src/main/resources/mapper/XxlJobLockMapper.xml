@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smartcoding.schedule.mapper.XxlJobLockMapper">
+  <resultMap id="BaseResultMap" type="com.smartcoding.schedule.core.model.XxlJobLock">
+    <id column="lock_name" jdbcType="VARCHAR" property="lockName" />
+    <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
+    <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    lock_name, gmt_create, gmt_modified
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from xxl_job_lock
+    where lock_name = #{lockName,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from xxl_job_lock
+    where lock_name = #{lockName,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.smartcoding.schedule.core.model.XxlJobLock">
+    <selectKey keyProperty="lockName" order="BEFORE" resultType="java.lang.String">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into xxl_job_lock (lock_name, gmt_create, gmt_modified
+      )
+    values (#{lockName,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.smartcoding.schedule.core.model.XxlJobLock">
+    <selectKey keyProperty="lockName" order="BEFORE" resultType="java.lang.String">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into xxl_job_lock
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      lock_name,
+      <if test="gmtCreate != null">
+        gmt_create,
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      #{lockName,jdbcType=VARCHAR},
+      <if test="gmtCreate != null">
+        #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.smartcoding.schedule.core.model.XxlJobLock">
+    update xxl_job_lock
+    <set>
+      <if test="gmtCreate != null">
+        gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gmtModified != null">
+        gmt_modified = #{gmtModified,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where lock_name = #{lockName,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.smartcoding.schedule.core.model.XxlJobLock">
+    update xxl_job_lock
+    set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
+      gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}
+    where lock_name = #{lockName,jdbcType=VARCHAR}
+  </update>
+  <!--==========================================手动添加sql语句开始分割线========================================-->
+  <insert id="insertLockName">
+   insert into xxl_job_lock (lock_name)
+   values (#{lockName,jdbcType=VARCHAR})
+  </insert>
+</mapper>

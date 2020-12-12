@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smartcoding.schedule.mapper.XxlJobAlarmInfoMapper">
+
+    <resultMap type="com.smartcoding.schedule.core.model.XxlAlarmInfo" id="XxlJobAlarmWayResult">
+        <result column="id" property="id"/>
+        <result column="alarm_type" property="alarmType"/>
+        <result column="alarm_name" property="alarmName"/>
+        <result column="alarm_status" property="alarmStatus"/>
+        <result column="alarm_template" property="alarmTemplate"/>
+        <result column="alarm_url" property="alarmUrl"/>
+        <result column="redirect_url" property="redirectUrl"/>
+        <result column="alarm_host" property="alarmHost"/>
+        <result column="alarm_port" property="alarmPort"/>
+        <result column="alarm_username" property="alarmUsername"/>
+        <result column="alarm_password" property="alarmPassword"/>
+        <result column="http_param" property="httpParam"/>
+        <result column="http_way" property="httpWay"/>
+        <result column="http_headers" property="httpHeaders"/>
+        <result column="connection_status" property="connectionStatus"/>
+        <result column="create_by" property="createBy"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_by" property="updateBy"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="gmt_create" property="gmtCreate"/>
+        <result column="gmt_modified" property="gmtModified"/>
+    </resultMap>
+
+    <sql id="selectXxlJobAlarmWayVo">
+        select id, alarm_type, alarm_name, alarm_status, alarm_template, alarm_url,redirect_url, alarm_host, alarm_port, alarm_username, alarm_password, http_param, http_way, http_headers, connection_status, create_by, create_time, update_by, update_time, gmt_create, gmt_modified from xxl_job_alarm_info
+    </sql>
+
+    <select id="selectXxlJobAlarmWayList" parameterType="com.smartcoding.schedule.core.model.XxlAlarmInfo"
+            resultMap="XxlJobAlarmWayResult">
+        <include refid="selectXxlJobAlarmWayVo"/>
+        <where>
+            <if test="id != null and id gt 0 ">and id = #{id}</if>
+            <if test="alarmName != null  and alarmName != ''">and alarm_name like concat('%', #{alarmName}, '%')</if>
+            <if test="alarmStatus != null ">and alarm_status = #{alarmStatus}</if>
+        </where>
+    </select>
+
+    <select id="selectXxlJobAlarmWayById" parameterType="Long" resultMap="XxlJobAlarmWayResult">
+        <include refid="selectXxlJobAlarmWayVo"/>
+        where id = #{id}
+    </select>
+    <select id="selectXxlJobAlarmInfoByAlarmType" resultMap="XxlJobAlarmWayResult">
+        select
+        <include refid="selectXxlJobAlarmWayVo"/>
+        from xxl_job_alarm_info where alarm_type = #{alarmType}
+    </select>
+
+    <insert id="insertXxlJobAlarmWay" parameterType="com.smartcoding.schedule.core.model.XxlAlarmInfo"
+            useGeneratedKeys="true" keyProperty="id">
+        insert into xxl_job_alarm_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="alarmType != null and alarmType != ''">alarm_type,</if>
+            <if test="alarmName != null">alarm_name,</if>
+            <if test="alarmStatus != null">alarm_status,</if>
+            <if test="alarmTemplate != null">alarm_template,</if>
+            <if test="alarmUrl != null">alarm_url,</if>
+            <if test="redirectUrl != null">redirect_url,</if>
+            <if test="alarmHost != null">alarm_host,</if>
+            <if test="alarmPort != null">alarm_port,</if>
+            <if test="alarmUsername != null">alarm_username,</if>
+            <if test="alarmPassword != null">alarm_password,</if>
+            <if test="httpParam != null">http_param,</if>
+            <if test="httpWay != null">http_way,</if>
+            <if test="httpHeaders != null">http_headers,</if>
+            <if test="connectionStatus != null">connection_status,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="gmtCreate != null">gmt_create,</if>
+            <if test="gmtModified != null">gmt_modified,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="alarmType != null and alarmType != ''">#{alarmType},</if>
+            <if test="alarmName != null">#{alarmName},</if>
+            <if test="alarmStatus != null">#{alarmStatus},</if>
+            <if test="alarmTemplate != null">#{alarmTemplate},</if>
+            <if test="alarmUrl != null">#{alarmUrl},</if>
+            <if test="redirectUrl != null">#{redirectUrl},</if>
+            <if test="alarmHost != null">#{alarmHost},</if>
+            <if test="alarmPort != null">#{alarmPort},</if>
+            <if test="alarmUsername != null">#{alarmUsername},</if>
+            <if test="alarmPassword != null">#{alarmPassword},</if>
+            <if test="httpParam != null">#{httpParam},</if>
+            <if test="httpWay != null">#{httpWay},</if>
+            <if test="httpHeaders != null">#{httpHeaders},</if>
+            <if test="connectionStatus != null">#{connectionStatus},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="gmtCreate != null">#{gmtCreate},</if>
+            <if test="gmtModified != null">#{gmtModified},</if>
+        </trim>
+    </insert>
+
+    <update id="updateXxlJobAlarmWay" parameterType="com.smartcoding.schedule.core.model.XxlAlarmInfo">
+        update xxl_job_alarm_info
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="alarmType != null and alarmType != ''">alarm_type = #{alarmType},</if>
+            <if test="alarmName != null">alarm_name = #{alarmName},</if>
+            <if test="alarmStatus != null">alarm_status = #{alarmStatus},</if>
+            <if test="alarmTemplate != null">alarm_template = #{alarmTemplate},</if>
+            <if test="alarmUrl != null">alarm_url = #{alarmUrl},</if>
+            <if test="redirectUrl != null">redirect_url = #{redirectUrl},</if>
+            <if test="alarmHost != null">alarm_host = #{alarmHost},</if>
+            <if test="alarmPort != null">alarm_port = #{alarmPort},</if>
+            <if test="alarmUsername != null">alarm_username = #{alarmUsername},</if>
+            <if test="alarmPassword != null">alarm_password = #{alarmPassword},</if>
+            <if test="httpParam != null">http_param = #{httpParam},</if>
+            <if test="httpWay != null">http_way = #{httpWay},</if>
+            <if test="httpHeaders != null">http_headers = #{httpHeaders},</if>
+            <if test="connectionStatus != null">connection_status = #{connectionStatus},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="gmtCreate != null">gmt_create = #{gmtCreate},</if>
+            <if test="gmtModified != null">gmt_modified = #{gmtModified},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteXxlJobAlarmWayById" parameterType="Long">
+        delete from xxl_job_alarm_info where id = #{id}
+    </delete>
+
+    <delete id="deleteXxlJobAlarmWayByIds" parameterType="String">
+        delete from xxl_job_alarm_info where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="querySearch" resultType="com.smartcoding.schedule.core.model.bo.XxlShortAlarmInfoBO">
+        select
+        id as id,
+        alarm_type as alarmType,
+        alarm_name as alarmName,
+        alarm_status as alarmStatus
+        from xxl_job_alarm_info
+        <trim prefix="WHERE" prefixOverrides="AND | OR">
+            <if test="searchContent != null and searchContent != ''">
+                AND alarm_name like CONCAT(CONCAT('%', #{searchContent}), '%')
+            </if>
+        </trim>
+        ORDER BY gmt_create desc,id DESC
+        limit #{pageSize}
+
+    </select>
+    <select id="queryIds" resultType="com.smartcoding.schedule.core.model.bo.XxlShortAlarmInfoBO">
+        select
+        id as id,
+        alarm_type as alarmType,
+        alarm_name as alarmName,
+        alarm_status as alarmStatus
+        from xxl_job_alarm_info
+        where id in
+        <foreach item="id" collection="idList" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+
+</mapper>

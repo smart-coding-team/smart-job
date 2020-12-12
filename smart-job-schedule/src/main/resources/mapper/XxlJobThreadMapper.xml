@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.smartcoding.schedule.mapper.XxlJobThreadMapper">
+
+    <resultMap type="com.smartcoding.schedule.core.model.XxlJobThread" id="XxlJobScheduleResult">
+        <result column="id" property="id"/>
+        <result column="address" property="address"/>
+        <result column="host_name" property="hostName"/>
+        <result column="thread_type" property="threadType"/>
+        <result column="thread_status" property="threadStatus"/>
+        <result column="update_by" property="updateBy"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="last_online_time" property="lastOnlineTime"/>
+        <result column="gmt_create" property="gmtCreate"/>
+        <result column="gmt_modified" property="gmtModified"/>
+    </resultMap>
+
+    <sql id="selectXxlJobScheduleVo">
+        select id, address,host_name, thread_type, thread_status,last_online_time, update_by, update_time, gmt_create, gmt_modified from xxl_job_thread
+    </sql>
+
+    <select id="selectXxlJobThreadList" parameterType="com.smartcoding.schedule.core.model.XxlJobThread"
+            resultMap="XxlJobScheduleResult">
+        <include refid="selectXxlJobScheduleVo"/>
+        <where>
+            <if test="address != null  and address != ''">and address = #{address}</if>
+            <if test="threadType != null">and thread_type = #{threadType}</if>
+            <if test="threadStatus != null ">and thread_status = #{threadStatus}</if>
+        </where>
+    </select>
+
+    <select id="selectXxlJobThreadById" parameterType="Long" resultMap="XxlJobScheduleResult">
+        <include refid="selectXxlJobScheduleVo"/>
+        where id = #{id}
+    </select>
+
+
+    <insert id="insertXxlJobThread" parameterType="com.smartcoding.schedule.core.model.XxlJobThread" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into xxl_job_thread
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="address != null and address != ''">address,</if>
+            <if test="hostName != null and hostName != ''">host_name,</if>
+            <if test="threadType != null">thread_type,</if>
+            <if test="threadStatus != null">thread_status,</if>
+            <if test="lastOnlineTime != null">last_online_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="gmtCreate != null">gmt_create,</if>
+            <if test="gmtModified != null">gmt_modified,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="address != null and address != ''">#{address},</if>
+            <if test="hostName != null and hostName != ''">#{hostName},</if>
+            <if test="threadType != null">#{threadType},</if>
+            <if test="threadStatus != null">#{threadStatus},</if>
+            <if test="lastOnlineTime != null">#{lastOnlineTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="gmtCreate != null">#{gmtCreate},</if>
+            <if test="gmtModified != null">#{gmtModified},</if>
+        </trim>
+    </insert>
+
+    <update id="updateXxlJobThread" parameterType="com.smartcoding.schedule.core.model.XxlJobThread">
+        update xxl_job_thread
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="address != null and address != ''">address = #{address},</if>
+            <if test="hostName != null and hostName != ''">host_name = #{hostName},</if>
+            <if test="threadType != null">thread_type = #{threadType},</if>
+            <if test="threadStatus != null">thread_status = #{threadStatus},</if>
+            <if test="lastOnlineTime != null">last_online_time = #{lastOnlineTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="gmtCreate != null">gmt_create = #{gmtCreate},</if>
+            <if test="gmtModified != null">gmt_modified = #{gmtModified},</if>
+        </trim>
+        where id = #{id}
+    </update>
+    <update id="updateXxlJobThreadOnlineTime">
+        update xxl_job_thread set last_online_time=sysdate() where address=#{address} and thread_type =#{threadType}
+    </update>
+
+    <delete id="deleteXxlJobThreadById" parameterType="Long">
+        delete from xxl_job_thread where id = #{id} limit 1
+    </delete>
+
+    <delete id="deleteXxlJobThreadByIds" parameterType="String">
+        delete from xxl_job_thread where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    <delete id="deleteXxlJobThreadByAddress">
+        delete from xxl_job_thread where address=#{address} and thread_type =#{threadType}  and thread_status=#{threadStatus}
+    </delete>
+    <select id="selectXxlJobThreadListByAddress"
+            resultMap="XxlJobScheduleResult">
+        <include refid="selectXxlJobScheduleVo"/>
+        where address=#{address} and thread_type in
+        <foreach item="id" collection="codeList" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+    <select id="selectXxlJobThreadByAddress" resultMap="XxlJobScheduleResult">
+        <include refid="selectXxlJobScheduleVo"/>
+        where address=#{address} and thread_type =#{threadType}
+    </select>
+
+</mapper>

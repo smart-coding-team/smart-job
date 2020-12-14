@@ -1,6 +1,6 @@
 # 开发环境配置
 server:
-  port: 8080
+  port: 7040
 # 数据源配置
 spring:
   datasource:

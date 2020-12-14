@@ -31,12 +31,9 @@ public class DemoJobHandler {
     private Logger log = LoggerFactory.getLogger(DemoJobHandler.class);
 
 
-    @Job(executorHandler = "demoJobHandler", jobName = "xxl-job测试任务", jobCron = "0 0 12 * * ?")
+    @Job(executorHandler = "demoJobHandler", jobName = "smart-job演示测试任务", jobCron = "0 0 12 * * ?")
     public ReturnT<String> execute(String param) throws Exception {
         log.info("XXL-JOB,demoJobHandler  time:{},param:{}",LocalDateTime.now(),param);
-        if (param != null) {
-            Integer integer = Integer.valueOf(param);
-        }
         XxlJobLogger.log("XXL-JOB,demoJobHandler  time:{}", LocalDateTime.now());
 
         return ReturnT.SUCCESS;

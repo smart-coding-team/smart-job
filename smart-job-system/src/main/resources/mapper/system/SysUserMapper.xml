@@ -124,7 +124,7 @@
         <if test="password != null and password != ''">password,</if>
         <if test="status != null ">status,</if>
         <if test="createType != null ">create_type,</if>
-        <if test="expireDate != null and expireDate != ''">expire_date,</if>
+        <if test="expireDate != null ">expire_date,</if>
         <if test="createBy != null and createBy != ''">create_by,</if>
         <if test="remark != null and remark != ''">remark,</if>
         create_time
@@ -140,7 +140,7 @@
         <if test="password != null and password != ''">#{password},</if>
         <if test="status != null ">#{status},</if>
         <if test="createType != null">#{createType},</if>
-        <if test="expireDate != null and expireDate != ''">#{expireDate},</if>
+        <if test="expireDate != null">#{expireDate},</if>
         <if test="createBy != null and createBy != ''">#{createBy},</if>
         <if test="remark != null and remark != ''">#{remark},</if>
         sysdate()
@@ -160,7 +160,7 @@
             <if test="password != null and password != ''">password = #{password},</if>
             <if test="status != null ">status = #{status},</if>
             <if test="createType != null ">create_type = #{createType},</if>
-            <if test="expireDate != null and expireDate != ''">expire_date = #{expireDate},</if>
+            <if test="expireDate != null ">expire_date = #{expireDate},</if>
             <if test="loginIp != null and loginIp != ''">login_ip = #{loginIp},</if>
             <if test="loginDate != null">login_date = #{loginDate},</if>
             <if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>

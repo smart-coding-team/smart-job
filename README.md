@@ -35,3 +35,13 @@ XXL-JOB是一个分布式任务调度平台，其核心设计目标是开发迅�
 
 ## 演示图
 
+![avatar](doc/image/登录页面.png)
+![avatar](doc/image/首页.png)
+![avatar](doc/image/任务管理.png)
+![avatar](doc/image/任务日志.png)
+![avatar](doc/image/任务执行器.png)
+![avatar](doc/image/调度管理.png)
+![avatar](doc/image/告警记录.png)
+![avatar](doc/image/告警配置.png)
+![avatar](doc/image/用户管理.png)
+![avatar](doc/image/角色管理.png)

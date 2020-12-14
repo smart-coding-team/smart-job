@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.smartcoding.generator.mapper.GenTableColumnMapper">
+<mapper namespace="cn.smartcoding.generator.mapper.GenTableColumnMapper">
 
-    <resultMap type="com.smartcoding.generator.domain.GenTableColumn" id="GenTableColumnResult">
+    <resultMap type="cn.smartcoding.generator.domain.GenTableColumn" id="GenTableColumnResult">
         <id     property="columnId"       column="column_id"      />
         <result property="tableId"        column="table_id"       />
         <result property="columnName"     column="column_name"    />
@@ -45,7 +45,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		order by ordinal_position
 	</select>
 
-    <insert id="insertGenTableColumn" parameterType="com.smartcoding.generator.domain.GenTableColumn" useGeneratedKeys="true" keyProperty="columnId">
+    <insert id="insertGenTableColumn" parameterType="cn.smartcoding.generator.domain.GenTableColumn" useGeneratedKeys="true" keyProperty="columnId">
         insert into gen_table_column (
 			<if test="tableId != null and tableId != ''">table_id,</if>
 			<if test="columnName != null and columnName != ''">column_name,</if>
@@ -89,7 +89,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
          )
     </insert>
 
-    <update id="updateGenTableColumn" parameterType="com.smartcoding.generator.domain.GenTableColumn">
+    <update id="updateGenTableColumn" parameterType="cn.smartcoding.generator.domain.GenTableColumn">
         update gen_table_column
         <set>
             column_comment = #{columnComment},

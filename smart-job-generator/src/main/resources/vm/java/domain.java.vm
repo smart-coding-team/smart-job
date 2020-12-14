@@ -3,7 +3,7 @@ package ${packageName}.domain;
 #foreach ($import in $importList)
 import ${import};
 #end
-import com.smartcoding.common.annotation.Excel;
+import cn.smartcoding.common.annotation.Excel;
 #if($table.crud)
 #elseif($table.tree)
 #end

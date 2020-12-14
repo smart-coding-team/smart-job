@@ -2,8 +2,8 @@
 
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.smartcoding.schedule.mapper.XxlJobGroupMapper">
-  <resultMap id="BaseResultMap" type="com.smartcoding.schedule.core.model.XxlJobGroup">
+<mapper namespace="cn.smartcoding.schedule.mapper.XxlJobGroupMapper">
+  <resultMap id="BaseResultMap" type="cn.smartcoding.schedule.core.model.XxlJobGroup">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="app_name" jdbcType="VARCHAR" property="appName" />
     <result column="title" jdbcType="VARCHAR" property="title" />
@@ -30,7 +30,7 @@
     delete from xxl_job_group
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.smartcoding.schedule.core.model.XxlJobGroup">
+  <insert id="insert" parameterType="cn.smartcoding.schedule.core.model.XxlJobGroup">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -43,7 +43,7 @@
       #{alarmIds,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.smartcoding.schedule.core.model.XxlJobGroup">
+  <insert id="insertSelective" parameterType="cn.smartcoding.schedule.core.model.XxlJobGroup">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -113,7 +113,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.smartcoding.schedule.core.model.XxlJobGroup">
+  <update id="updateByPrimaryKeySelective" parameterType="cn.smartcoding.schedule.core.model.XxlJobGroup">
     update xxl_job_group
     <set>
       <if test="appName != null">
@@ -149,7 +149,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.smartcoding.schedule.core.model.XxlJobGroup">
+  <update id="updateByPrimaryKey" parameterType="cn.smartcoding.schedule.core.model.XxlJobGroup">
     update xxl_job_group
     set app_name = #{appName,jdbcType=VARCHAR},
       title = #{title,jdbcType=VARCHAR},
@@ -176,7 +176,7 @@
         t.gmt_create,
 		t.gmt_modified
 	</sql>
-	<resultMap id="BaseResultMapBO" type="com.smartcoding.schedule.core.model.vo.JobGroupVO" extends="BaseResultMap">
+	<resultMap id="BaseResultMapBO" type="cn.smartcoding.schedule.core.model.vo.JobGroupVO" extends="BaseResultMap">
 	</resultMap>
 	<select id="findAll" resultMap="BaseResultMap">
 		SELECT <include refid="Base_Column_List_2" />
@@ -194,7 +194,7 @@
 		WHERE t.address_type = #{addressType}
 		ORDER BY t.order ASC
 	</select>
-    <update id="update" parameterType="com.smartcoding.schedule.core.model.XxlJobGroup" >
+    <update id="update" parameterType="cn.smartcoding.schedule.core.model.XxlJobGroup" >
 		UPDATE xxl_job_group
 		SET `app_name` = #{appName},
 			`title` = #{title},

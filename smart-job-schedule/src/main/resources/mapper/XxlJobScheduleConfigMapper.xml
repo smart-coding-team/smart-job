@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.smartcoding.schedule.mapper.XxlJobScheduleConfigMapper">
+<mapper namespace="cn.smartcoding.schedule.mapper.XxlJobScheduleConfigMapper">
 
-    <resultMap type="com.smartcoding.schedule.core.model.XxlJobScheduleConfig" id="XxlJobScheduleConfigResult">
+    <resultMap type="cn.smartcoding.schedule.core.model.XxlJobScheduleConfig" id="XxlJobScheduleConfigResult">
         <result column="id" property="id"/>
         <result column="config_key" property="configKey"/>
         <result column="config_value" property="configValue"/>
@@ -21,7 +21,7 @@
         select id, config_key, config_value, config_Status, create_by, create_time, update_by, update_time, gmt_create, gmt_modified from xxl_job_schedule_config
     </sql>
 
-    <select id="selectXxlJobScheduleConfigList" parameterType="com.smartcoding.schedule.core.model.XxlJobScheduleConfig"
+    <select id="selectXxlJobScheduleConfigList" parameterType="cn.smartcoding.schedule.core.model.XxlJobScheduleConfig"
             resultMap="XxlJobScheduleConfigResult">
         <include refid="selectXxlJobScheduleConfigVo"/>
         <where>
@@ -35,7 +35,7 @@
         where id = #{id}
     </select>
 
-    <insert id="insertXxlJobScheduleConfig" parameterType="com.smartcoding.schedule.core.model.XxlJobScheduleConfig"
+    <insert id="insertXxlJobScheduleConfig" parameterType="cn.smartcoding.schedule.core.model.XxlJobScheduleConfig"
             useGeneratedKeys="true" keyProperty="id">
         insert into xxl_job_schedule_config
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -62,7 +62,7 @@
         </trim>
     </insert>
 
-    <update id="updateXxlJobScheduleConfig" parameterType="com.smartcoding.schedule.core.model.XxlJobScheduleConfig">
+    <update id="updateXxlJobScheduleConfig" parameterType="cn.smartcoding.schedule.core.model.XxlJobScheduleConfig">
         update xxl_job_schedule_config
         <trim prefix="SET" suffixOverrides=",">
             <if test="configKey != null and configKey != ''">config_key = #{configKey},</if>

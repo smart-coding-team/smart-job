@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>smart-job</artifactId>
-        <groupId>com.smartcoding</groupId>
+        <groupId>cn.smartcoding</groupId>
         <version>3.0.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
@@ -57,16 +57,16 @@
 
         <!-- 核心模块-->
         <dependency>
-            <groupId>com.smartcoding</groupId>
+            <groupId>cn.smartcoding</groupId>
            <artifactId>smart-job-system</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.smartcoding</groupId>
+            <groupId>cn.smartcoding</groupId>
            <artifactId>smart-job-schedule</artifactId>
         </dependency>
         <!-- 代码生成-->
         <dependency>
-            <groupId>com.smartcoding</groupId>
+            <groupId>cn.smartcoding</groupId>
            <artifactId>smart-job-generator</artifactId>
         </dependency>
     </dependencies>
@@ -79,7 +79,7 @@
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
                     <!--启动类-->
-                    <mainClass>com.smartcoding.JobApplication</mainClass>
+                    <mainClass>cn.smartcoding.JobApplication</mainClass>
                 </configuration>
                 <executions>
                     <execution>

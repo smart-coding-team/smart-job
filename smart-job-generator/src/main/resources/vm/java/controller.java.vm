@@ -2,7 +2,7 @@ package ${packageName}.controller;
 
 import java.util.List;
 
-import com.smartcoding.common.core.domain.ResultModel;
+import cn.smartcoding.common.core.domain.ResultModel;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,12 +13,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.smartcoding.common.annotation.Log;
-import com.smartcoding.common.core.controller.BaseController;
-import com.smartcoding.common.enums.BusinessType;
+import cn.smartcoding.common.annotation.Log;
+import cn.smartcoding.common.core.controller.BaseController;
+import cn.smartcoding.common.enums.BusinessType;
 import ${packageName}.domain.${ClassName};
 import ${packageName}.service.I${ClassName}Service;
-import com.smartcoding.common.utils.poi.ExcelUtil;
+import cn.smartcoding.common.utils.poi.ExcelUtil;
 #if($table.crud)
 #elseif($table.tree)
 #end

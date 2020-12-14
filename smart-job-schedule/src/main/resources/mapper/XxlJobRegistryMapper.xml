@@ -2,8 +2,8 @@
 
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.smartcoding.schedule.mapper.XxlJobRegistryMapper">
-  <resultMap id="BaseResultMap" type="com.smartcoding.schedule.core.model.XxlJobRegistry">
+<mapper namespace="cn.smartcoding.schedule.mapper.XxlJobRegistryMapper">
+  <resultMap id="BaseResultMap" type="cn.smartcoding.schedule.core.model.XxlJobRegistry">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="registry_group" jdbcType="VARCHAR" property="registryGroup" />
     <result column="registry_key" jdbcType="VARCHAR" property="registryKey" />
@@ -25,7 +25,7 @@
     delete from xxl_job_registry
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.smartcoding.schedule.core.model.XxlJobRegistry">
+  <insert id="insert" parameterType="cn.smartcoding.schedule.core.model.XxlJobRegistry">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -36,7 +36,7 @@
       #{updateTime,jdbcType=TIMESTAMP}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.smartcoding.schedule.core.model.XxlJobRegistry">
+  <insert id="insertSelective" parameterType="cn.smartcoding.schedule.core.model.XxlJobRegistry">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -82,7 +82,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.smartcoding.schedule.core.model.XxlJobRegistry">
+  <update id="updateByPrimaryKeySelective" parameterType="cn.smartcoding.schedule.core.model.XxlJobRegistry">
     update xxl_job_registry
     <set>
       <if test="registryGroup != null">
@@ -106,7 +106,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.smartcoding.schedule.core.model.XxlJobRegistry">
+  <update id="updateByPrimaryKey" parameterType="cn.smartcoding.schedule.core.model.XxlJobRegistry">
     update xxl_job_registry
     set registry_group = #{registryGroup,jdbcType=VARCHAR},
       registry_key = #{registryKey,jdbcType=VARCHAR},

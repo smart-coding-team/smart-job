@@ -2,8 +2,8 @@
 
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.smartcoding.schedule.mapper.XxlJobLockMapper">
-  <resultMap id="BaseResultMap" type="com.smartcoding.schedule.core.model.XxlJobLock">
+<mapper namespace="cn.smartcoding.schedule.mapper.XxlJobLockMapper">
+  <resultMap id="BaseResultMap" type="cn.smartcoding.schedule.core.model.XxlJobLock">
     <id column="lock_name" jdbcType="VARCHAR" property="lockName" />
     <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
     <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
@@ -21,7 +21,7 @@
     delete from xxl_job_lock
     where lock_name = #{lockName,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.smartcoding.schedule.core.model.XxlJobLock">
+  <insert id="insert" parameterType="cn.smartcoding.schedule.core.model.XxlJobLock">
     <selectKey keyProperty="lockName" order="BEFORE" resultType="java.lang.String">
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -30,7 +30,7 @@
     values (#{lockName,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.smartcoding.schedule.core.model.XxlJobLock">
+  <insert id="insertSelective" parameterType="cn.smartcoding.schedule.core.model.XxlJobLock">
     <selectKey keyProperty="lockName" order="BEFORE" resultType="java.lang.String">
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -54,7 +54,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.smartcoding.schedule.core.model.XxlJobLock">
+  <update id="updateByPrimaryKeySelective" parameterType="cn.smartcoding.schedule.core.model.XxlJobLock">
     update xxl_job_lock
     <set>
       <if test="gmtCreate != null">
@@ -66,7 +66,7 @@
     </set>
     where lock_name = #{lockName,jdbcType=VARCHAR}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.smartcoding.schedule.core.model.XxlJobLock">
+  <update id="updateByPrimaryKey" parameterType="cn.smartcoding.schedule.core.model.XxlJobLock">
     update xxl_job_lock
     set gmt_create = #{gmtCreate,jdbcType=TIMESTAMP},
       gmt_modified = #{gmtModified,jdbcType=TIMESTAMP}

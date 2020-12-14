@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.smartcoding.system.mapper.SysUserMapper">
+<mapper namespace="cn.smartcoding.system.mapper.SysUserMapper">
 
-    <resultMap type="com.smartcoding.common.core.domain.entity.SysUser" id="SysUserResult">
+    <resultMap type="cn.smartcoding.common.core.domain.entity.SysUser" id="SysUserResult">
         <id property="userId" column="user_id"/>
         <result property="deptId" column="dept_id"/>
         <result property="userName" column="user_name"/>
@@ -25,12 +25,12 @@
         <result property="updateBy" column="update_by"/>
         <result property="updateTime" column="update_time"/>
         <result property="remark" column="remark"/>
-        <association property="dept" column="dept_id" javaType="com.smartcoding.common.core.domain.entity.SysDept"
+        <association property="dept" column="dept_id" javaType="cn.smartcoding.common.core.domain.entity.SysDept"
                      resultMap="deptResult"/>
         <collection property="roles" javaType="java.util.List" resultMap="RoleResult"/>
     </resultMap>
 
-    <resultMap id="deptResult" type="com.smartcoding.common.core.domain.entity.SysDept">
+    <resultMap id="deptResult" type="cn.smartcoding.common.core.domain.entity.SysDept">
         <id property="deptId" column="dept_id"/>
         <result property="parentId" column="parent_id"/>
         <result property="deptName" column="dept_name"/>
@@ -39,7 +39,7 @@
         <result property="status" column="dept_status"/>
     </resultMap>
 
-    <resultMap id="RoleResult" type="com.smartcoding.common.core.domain.entity.SysRole">
+    <resultMap id="RoleResult" type="cn.smartcoding.common.core.domain.entity.SysRole">
         <id property="roleId" column="role_id"/>
         <result property="roleName" column="role_name"/>
         <result property="roleKey" column="role_key"/>
@@ -58,7 +58,7 @@
 		    left join sys_role r on r.role_id = ur.role_id
     </sql>
 
-    <select id="selectUserList" parameterType="com.smartcoding.common.core.domain.entity.SysUser" resultMap="SysUserResult">
+    <select id="selectUserList" parameterType="cn.smartcoding.common.core.domain.entity.SysUser" resultMap="SysUserResult">
         select u.user_id, u.dept_id, u.nick_name, u.user_name, u.email, u.avatar, u.mobile, u.password, u.sex,
         u.status, u.create_type, u.expire_date, u.del_flag, u.login_ip, u.login_date, u.create_by, u.create_time, u.remark, d.dept_name, d.leader from
         sys_user u
@@ -110,7 +110,7 @@
 	</select>
 
 
-    <insert id="insertUser" parameterType="com.smartcoding.common.core.domain.entity.SysUser" useGeneratedKeys="true"
+    <insert id="insertUser" parameterType="cn.smartcoding.common.core.domain.entity.SysUser" useGeneratedKeys="true"
             keyProperty="userId">
         insert into sys_user(
         <if test="userId != null and userId != 0">user_id,</if>
@@ -147,7 +147,7 @@
         )
     </insert>
 
-    <update id="updateUser" parameterType="com.smartcoding.common.core.domain.entity.SysUser">
+    <update id="updateUser" parameterType="cn.smartcoding.common.core.domain.entity.SysUser">
         update sys_user
         <set>
             <if test="deptId != null and deptId != 0">dept_id = #{deptId},</if>
@@ -170,11 +170,11 @@
         where user_id = #{userId}
     </update>
 
-    <update id="updateUserAvatar" parameterType="com.smartcoding.common.core.domain.entity.SysUser">
+    <update id="updateUserAvatar" parameterType="cn.smartcoding.common.core.domain.entity.SysUser">
  		update sys_user set avatar = #{avatar} where user_name = #{userName}
 	</update>
 
-    <update id="resetUserPwd" parameterType="com.smartcoding.common.core.domain.entity.SysUser">
+    <update id="resetUserPwd" parameterType="cn.smartcoding.common.core.domain.entity.SysUser">
  		update sys_user set password = #{password} where user_name = #{userName}
 	</update>
 
@@ -203,7 +203,7 @@
         </foreach>
     </select>
 
-    <select id="getShortUserBO" resultType="com.smartcoding.system.domain.vo.SysUserVO">
+    <select id="getShortUserBO" resultType="cn.smartcoding.system.domain.vo.SysUserVO">
         select
         user_id as userId,
         user_name as userName,

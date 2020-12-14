@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.smartcoding.schedule.mapper.XxlJobAlarmInfoMapper">
+<mapper namespace="cn.smartcoding.schedule.mapper.XxlJobAlarmInfoMapper">
 
-    <resultMap type="com.smartcoding.schedule.core.model.XxlAlarmInfo" id="XxlJobAlarmWayResult">
+    <resultMap type="cn.smartcoding.schedule.core.model.XxlAlarmInfo" id="XxlJobAlarmWayResult">
         <result column="id" property="id"/>
         <result column="alarm_type" property="alarmType"/>
         <result column="alarm_name" property="alarmName"/>
@@ -32,7 +32,7 @@
         select id, alarm_type, alarm_name, alarm_status, alarm_template, alarm_url,redirect_url, alarm_host, alarm_port, alarm_username, alarm_password, http_param, http_way, http_headers, connection_status, create_by, create_time, update_by, update_time, gmt_create, gmt_modified from xxl_job_alarm_info
     </sql>
 
-    <select id="selectXxlJobAlarmWayList" parameterType="com.smartcoding.schedule.core.model.XxlAlarmInfo"
+    <select id="selectXxlJobAlarmWayList" parameterType="cn.smartcoding.schedule.core.model.XxlAlarmInfo"
             resultMap="XxlJobAlarmWayResult">
         <include refid="selectXxlJobAlarmWayVo"/>
         <where>
@@ -52,7 +52,7 @@
         from xxl_job_alarm_info where alarm_type = #{alarmType}
     </select>
 
-    <insert id="insertXxlJobAlarmWay" parameterType="com.smartcoding.schedule.core.model.XxlAlarmInfo"
+    <insert id="insertXxlJobAlarmWay" parameterType="cn.smartcoding.schedule.core.model.XxlAlarmInfo"
             useGeneratedKeys="true" keyProperty="id">
         insert into xxl_job_alarm_info
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -101,7 +101,7 @@
         </trim>
     </insert>
 
-    <update id="updateXxlJobAlarmWay" parameterType="com.smartcoding.schedule.core.model.XxlAlarmInfo">
+    <update id="updateXxlJobAlarmWay" parameterType="cn.smartcoding.schedule.core.model.XxlAlarmInfo">
         update xxl_job_alarm_info
         <trim prefix="SET" suffixOverrides=",">
             <if test="alarmType != null and alarmType != ''">alarm_type = #{alarmType},</if>
@@ -139,7 +139,7 @@
         </foreach>
     </delete>
 
-    <select id="querySearch" resultType="com.smartcoding.schedule.core.model.bo.XxlShortAlarmInfoBO">
+    <select id="querySearch" resultType="cn.smartcoding.schedule.core.model.bo.XxlShortAlarmInfoBO">
         select
         id as id,
         alarm_type as alarmType,
@@ -155,7 +155,7 @@
         limit #{pageSize}
 
     </select>
-    <select id="queryIds" resultType="com.smartcoding.schedule.core.model.bo.XxlShortAlarmInfoBO">
+    <select id="queryIds" resultType="cn.smartcoding.schedule.core.model.bo.XxlShortAlarmInfoBO">
         select
         id as id,
         alarm_type as alarmType,

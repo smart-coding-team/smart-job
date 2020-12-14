@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.smartcoding.schedule.mapper.XxlJobThreadMapper">
+<mapper namespace="cn.smartcoding.schedule.mapper.XxlJobThreadMapper">
 
-    <resultMap type="com.smartcoding.schedule.core.model.XxlJobThread" id="XxlJobScheduleResult">
+    <resultMap type="cn.smartcoding.schedule.core.model.XxlJobThread" id="XxlJobScheduleResult">
         <result column="id" property="id"/>
         <result column="address" property="address"/>
         <result column="host_name" property="hostName"/>
@@ -21,7 +21,7 @@
         select id, address,host_name, thread_type, thread_status,last_online_time, update_by, update_time, gmt_create, gmt_modified from xxl_job_thread
     </sql>
 
-    <select id="selectXxlJobThreadList" parameterType="com.smartcoding.schedule.core.model.XxlJobThread"
+    <select id="selectXxlJobThreadList" parameterType="cn.smartcoding.schedule.core.model.XxlJobThread"
             resultMap="XxlJobScheduleResult">
         <include refid="selectXxlJobScheduleVo"/>
         <where>
@@ -37,7 +37,7 @@
     </select>
 
 
-    <insert id="insertXxlJobThread" parameterType="com.smartcoding.schedule.core.model.XxlJobThread" useGeneratedKeys="true"
+    <insert id="insertXxlJobThread" parameterType="cn.smartcoding.schedule.core.model.XxlJobThread" useGeneratedKeys="true"
             keyProperty="id">
         insert into xxl_job_thread
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -64,7 +64,7 @@
         </trim>
     </insert>
 
-    <update id="updateXxlJobThread" parameterType="com.smartcoding.schedule.core.model.XxlJobThread">
+    <update id="updateXxlJobThread" parameterType="cn.smartcoding.schedule.core.model.XxlJobThread">
         update xxl_job_thread
         <trim prefix="SET" suffixOverrides=",">
             <if test="address != null and address != ''">address = #{address},</if>

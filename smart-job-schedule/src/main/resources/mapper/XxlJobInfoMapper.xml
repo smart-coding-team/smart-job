@@ -2,8 +2,8 @@
 
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.smartcoding.schedule.mapper.XxlJobInfoMapper">
-  <resultMap id="BaseResultMap" type="com.smartcoding.schedule.core.model.XxlJobInfo">
+<mapper namespace="cn.smartcoding.schedule.mapper.XxlJobInfoMapper">
+  <resultMap id="BaseResultMap" type="cn.smartcoding.schedule.core.model.XxlJobInfo">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="job_group" jdbcType="BIGINT" property="jobGroup" />
     <result column="job_cron" jdbcType="VARCHAR" property="jobCron" />
@@ -35,7 +35,7 @@
     <result column="gmt_create" jdbcType="TIMESTAMP" property="gmtCreate" />
     <result column="gmt_modified" jdbcType="TIMESTAMP" property="gmtModified" />
   </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.smartcoding.schedule.core.model.XxlJobInfo">
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="cn.smartcoding.schedule.core.model.XxlJobInfo">
     <result column="glue_source" jdbcType="LONGVARCHAR" property="glueSource" />
   </resultMap>
   <sql id="Base_Column_List">
@@ -61,7 +61,7 @@
     delete from xxl_job_info
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="com.smartcoding.schedule.core.model.XxlJobInfo">
+  <insert id="insert" parameterType="cn.smartcoding.schedule.core.model.XxlJobInfo">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -88,7 +88,7 @@
       #{gmtCreate,jdbcType=TIMESTAMP}, #{gmtModified,jdbcType=TIMESTAMP}, #{glueSource,jdbcType=LONGVARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.smartcoding.schedule.core.model.XxlJobInfo">
+  <insert id="insertSelective" parameterType="cn.smartcoding.schedule.core.model.XxlJobInfo">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -278,7 +278,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.smartcoding.schedule.core.model.XxlJobInfo">
+  <update id="updateByPrimaryKeySelective" parameterType="cn.smartcoding.schedule.core.model.XxlJobInfo">
     update xxl_job_info
     <set>
       <if test="jobGroup != null">
@@ -374,7 +374,7 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.smartcoding.schedule.core.model.XxlJobInfo">
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="cn.smartcoding.schedule.core.model.XxlJobInfo">
     update xxl_job_info
     set job_group = #{jobGroup,jdbcType=BIGINT},
       job_cron = #{jobCron,jdbcType=VARCHAR},
@@ -407,7 +407,7 @@
       glue_source = #{glueSource,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.smartcoding.schedule.core.model.XxlJobInfo">
+  <update id="updateByPrimaryKey" parameterType="cn.smartcoding.schedule.core.model.XxlJobInfo">
     update xxl_job_info
     set job_group = #{jobGroup,jdbcType=BIGINT},
       job_cron = #{jobCron,jdbcType=VARCHAR},
@@ -473,7 +473,7 @@
         t.gmt_create,
 		t.gmt_modified
 	</sql>
-  <resultMap extends="BaseResultMap" id="XxlJobInfoBOResultMap" type="com.smartcoding.schedule.core.model.bo.XxlJobInfoBO">
+  <resultMap extends="BaseResultMap" id="XxlJobInfoBOResultMap" type="cn.smartcoding.schedule.core.model.bo.XxlJobInfoBO">
   </resultMap>
   <select id="getJobList" parameterType="java.util.HashMap" resultMap="XxlJobInfoBOResultMap">
     SELECT <include refid="Base_Column_List_2" />
@@ -510,7 +510,7 @@
       </if>
     </where>
   </select>
-	<update id="update" parameterType="com.smartcoding.schedule.core.model.XxlJobInfo" >
+	<update id="update" parameterType="cn.smartcoding.schedule.core.model.XxlJobInfo" >
 		UPDATE xxl_job_info
 		SET
 			job_group = #{jobGroup},
@@ -551,7 +551,7 @@
         LIMIT #{pagesize}
 	</select>
 
-    <update id="scheduleUpdate" parameterType="com.smartcoding.schedule.core.model.XxlJobInfo"  >
+    <update id="scheduleUpdate" parameterType="cn.smartcoding.schedule.core.model.XxlJobInfo"  >
 		UPDATE xxl_job_info
 		SET
 			trigger_last_time = #{triggerLastTime},
@@ -559,14 +559,14 @@
 			trigger_status = #{triggerStatus}
 		WHERE id = #{id}
 	</update>
-  <select id="getXxlJobStatisticBO" resultType="com.smartcoding.schedule.core.model.bo.XxlJobStatisticBO">
+  <select id="getXxlJobStatisticBO" resultType="cn.smartcoding.schedule.core.model.bo.XxlJobStatisticBO">
     select
     count(1) as totalJobNum,
     sum(if(trigger_status=1,1,0)) as enableJobNum,
     sum(if(job_status=1,1,0)) as runningJobNum,
     from  xxl_job_info
   </select>
-  <select id="getXxlShortJobInfoBO" resultType="com.smartcoding.schedule.core.model.bo.XxlShortJobInfoBO">
+  <select id="getXxlShortJobInfoBO" resultType="cn.smartcoding.schedule.core.model.bo.XxlShortJobInfoBO">
     select
     id as id,
     job_name as jobName,
@@ -580,7 +580,7 @@
     order by id desc
     limit #{pageSize}
   </select>
-  <select id="getXxlShortJobInfoBOByNextExecute" resultType="com.smartcoding.schedule.core.model.bo.XxlShortJobInfoBO">
+  <select id="getXxlShortJobInfoBOByNextExecute" resultType="cn.smartcoding.schedule.core.model.bo.XxlShortJobInfoBO">
     select
     id as id,
     job_name as jobName,
@@ -596,7 +596,7 @@
     FROM xxl_job_info AS t
     WHERE t.job_group = #{jobGroup} and t.executor_handler=#{executorHandler}
   </select>
-  <select id="selectJobInfoByIdList" resultType="com.smartcoding.schedule.core.model.bo.XxlShortJobInfoBO">
+  <select id="selectJobInfoByIdList" resultType="cn.smartcoding.schedule.core.model.bo.XxlShortJobInfoBO">
         select
     id as id,
     job_name as jobName,
@@ -606,7 +606,7 @@
       #{id}
     </foreach>
   </select>
-    <update id="updateJobStatus" parameterType="com.smartcoding.schedule.core.model.XxlJobInfo">
+    <update id="updateJobStatus" parameterType="cn.smartcoding.schedule.core.model.XxlJobInfo">
   update xxl_job_info
   set
   job_status = #{jobStatus,jdbcType=TINYINT},

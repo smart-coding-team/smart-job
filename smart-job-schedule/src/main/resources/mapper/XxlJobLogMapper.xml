@@ -3,9 +3,9 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.smartcoding.schedule.mapper.XxlJobLogMapper">
+<mapper namespace="cn.smartcoding.schedule.mapper.XxlJobLogMapper">
 
-    <resultMap id="BaseResultMap" type="com.smartcoding.schedule.core.model.XxlJobLog">
+    <resultMap id="BaseResultMap" type="cn.smartcoding.schedule.core.model.XxlJobLog">
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="job_request_id" jdbcType="VARCHAR" property="jobRequestId"/>
         <result column="job_name" jdbcType="VARCHAR" property="jobName"/>
@@ -48,7 +48,7 @@
     delete from xxl_job_log
     where id = #{id,jdbcType=BIGINT}
   </delete>
-    <insert id="insert" parameterType="com.smartcoding.schedule.core.model.XxlJobLog">
+    <insert id="insert" parameterType="cn.smartcoding.schedule.core.model.XxlJobLog">
         <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
             SELECT LAST_INSERT_ID()
         </selectKey>
@@ -68,7 +68,7 @@
         #{gmtModified,jdbcType=TIMESTAMP}, #{triggerMsg,jdbcType=LONGVARCHAR}, #{handleMsg,jdbcType=LONGVARCHAR}
         )
     </insert>
-    <insert id="insertSelective" parameterType="com.smartcoding.schedule.core.model.XxlJobLog">
+    <insert id="insertSelective" parameterType="cn.smartcoding.schedule.core.model.XxlJobLog">
         <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
             SELECT LAST_INSERT_ID()
         </selectKey>
@@ -204,7 +204,7 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.smartcoding.schedule.core.model.XxlJobLog">
+    <update id="updateByPrimaryKeySelective" parameterType="cn.smartcoding.schedule.core.model.XxlJobLog">
         update xxl_job_log
         <set>
             <if test="jobRequestId != null">
@@ -267,7 +267,7 @@
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.smartcoding.schedule.core.model.XxlJobLog">
+    <update id="updateByPrimaryKey" parameterType="cn.smartcoding.schedule.core.model.XxlJobLog">
     update xxl_job_log
     set job_request_id = #{jobRequestId,jdbcType=VARCHAR},
       job_name = #{jobName,jdbcType=VARCHAR},
@@ -348,7 +348,7 @@
 	</delete>
 
 
-    <select id="triggerCountByDay" resultType="com.smartcoding.schedule.core.model.bo.XxlJobLogReportBO">
+    <select id="triggerCountByDay" resultType="cn.smartcoding.schedule.core.model.bo.XxlJobLogReportBO">
 		SELECT
 			COUNT(handle_code) triggerDayCount,
 			SUM(CASE WHEN (trigger_code in (0, 200) and handle_code = 0) then 1 else 0 end) as triggerDayCountRunning,
@@ -415,7 +415,7 @@
     <select id="countXxlJobLog" resultType="java.lang.Integer">
 		select count(*) from xxl_job_log where gmt_create <![CDATA[ < ]]> #{now}
 	</select>
-    <resultMap id="BaseResultMap2" type="com.smartcoding.schedule.core.model.XxlJobLog" extends="BaseResultMap">
+    <resultMap id="BaseResultMap2" type="cn.smartcoding.schedule.core.model.XxlJobLog" extends="BaseResultMap">
         <result column="trigger_msg" jdbcType="VARCHAR" property="triggerMsg"/>
         <result column="handle_msg" jdbcType="VARCHAR" property="handleMsg"/>
     </resultMap>

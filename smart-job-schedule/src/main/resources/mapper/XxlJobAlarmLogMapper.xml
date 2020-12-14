@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.smartcoding.schedule.mapper.XxlJobAlarmLogMapper">
+<mapper namespace="cn.smartcoding.schedule.mapper.XxlJobAlarmLogMapper">
 
-    <resultMap type="com.smartcoding.schedule.core.model.XxlJobAlarmLog" id="XxlJobAlarmLogResult">
+    <resultMap type="cn.smartcoding.schedule.core.model.XxlJobAlarmLog" id="XxlJobAlarmLogResult">
         <result column="id" property="id"/>
         <result column="log_id" property="logId"/>
         <result column="job_id" property="jobId"/>
@@ -23,7 +23,7 @@
         select id, log_id, alarm_id, alarm_name, send_status, job_id, job_name,notice_username, notice_way,error_msg, gmt_create, gmt_modified from xxl_job_alarm_log
     </sql>
 
-    <select id="selectXxlJobAlarmLogList" parameterType="com.smartcoding.schedule.core.model.XxlJobAlarmLog"
+    <select id="selectXxlJobAlarmLogList" parameterType="cn.smartcoding.schedule.core.model.XxlJobAlarmLog"
             resultMap="XxlJobAlarmLogResult">
         <include refid="selectXxlJobAlarmLogVo"/>
         <where>
@@ -38,7 +38,7 @@
         where id = #{id}
     </select>
 
-    <insert id="insertXxlJobAlarmLog" parameterType="com.smartcoding.schedule.core.model.XxlJobAlarmLog"
+    <insert id="insertXxlJobAlarmLog" parameterType="cn.smartcoding.schedule.core.model.XxlJobAlarmLog"
             useGeneratedKeys="true" keyProperty="id">
         insert into xxl_job_alarm_log
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -69,7 +69,7 @@
         </trim>
     </insert>
 
-    <update id="updateXxlJobAlarmLog" parameterType="com.smartcoding.schedule.core.model.XxlJobAlarmLog">
+    <update id="updateXxlJobAlarmLog" parameterType="cn.smartcoding.schedule.core.model.XxlJobAlarmLog">
         update xxl_job_alarm_log
         <trim prefix="SET" suffixOverrides=",">
             <if test="logId != null">log_id = #{logId},</if>

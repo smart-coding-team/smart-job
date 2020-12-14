@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
- com.smartcoding.xxl.job.starter.XxlJobAutoConfiguration
+ cn.smartcoding.xxl.job.starter.XxlJobAutoConfiguration

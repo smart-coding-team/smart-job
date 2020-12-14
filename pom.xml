@@ -16,6 +16,7 @@
         <module>smart-job-common</module>
         <module>smart-job-schedule</module>
         <module>smart-job-core</module>
+        <!--<module>smart-job-starter</module>-->
         <module>smart-job-generator</module>
     </modules>
     <packaging>pom</packaging>

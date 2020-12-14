@@ -20,12 +20,14 @@ logging:
 
 # Spring配置
 spring:
+  application:
+    name: smart-job
   # 资源信息
   messages:
     # 国际化资源文件路径
     basename: i18n/messages
   profiles:
-    active: test
+    active: dev
   # 文件上传
   servlet:
     multipart:
@@ -107,6 +109,7 @@ spring:
         max-active: 8
         # #连接池最大阻塞等待时间（使用负值表示没有限制）
         max-wait: -1ms
+
 
 # token配置
 token:
@@ -194,7 +197,7 @@ xss:
 
 
 log:
-  dir: /data/logs/xxl-job
+  dir:  data/logs/${spring.application.name}
   level: debug
 xxl:
   job:

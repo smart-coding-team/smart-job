@@ -83,9 +83,8 @@ public class SysProfileController extends BaseController {
             return ResultModel.error("新密码不能与旧密码相同");
         }
         if (userService.resetUserPwd(userName, SecurityUtils.encryptPassword(newPassword)) > 0) {
-            // 更新缓存用户密码
-            loginUser.getUser().setPassword(SecurityUtils.encryptPassword(newPassword));
-            tokenService.setLoginUser(loginUser);
+            // 退出重新登录
+            tokenService.delLoginUser(loginUser.getToken());
             return ResultModel.success();
         }
         return ResultModel.error("修改密码异常，请联系管理员");

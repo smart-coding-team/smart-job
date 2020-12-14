@@ -72,7 +72,7 @@
     </dependencies>
 
     <build>
-        <finalName>smart-xxl-job-1.0.0</finalName>
+        <finalName>smart-job-1.0.0</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

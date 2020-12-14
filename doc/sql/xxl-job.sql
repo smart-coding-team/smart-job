@@ -1,3 +1,6 @@
+CREATE DATABASE IF NOT EXISTS xxl_job DEFAULT CHARSET utf8mb4 COLLATE utf8mb4_general_ci;
+
+use xxl_job;
 
 
 CREATE TABLE `gen_table` (
@@ -23,8 +26,6 @@ CREATE TABLE `gen_table` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='代码生成业务表';
 
 
-# Dump of table gen_table_column
-# ------------------------------------------------------------
 
 CREATE TABLE `gen_table_column` (
   `column_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '编号',
@@ -54,9 +55,6 @@ CREATE TABLE `gen_table_column` (
 
 
 
-# Dump of table sys_config
-# ------------------------------------------------------------
-
 CREATE TABLE `sys_config` (
   `config_id` int(5) NOT NULL AUTO_INCREMENT COMMENT '参数主键',
   `config_name` varchar(100) DEFAULT '' COMMENT '参数名称',
@@ -76,8 +74,6 @@ CREATE TABLE `sys_config` (
 
 
 
-# Dump of table sys_dept
-# ------------------------------------------------------------
 
 CREATE TABLE `sys_dept` (
   `dept_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '部门id',
@@ -103,8 +99,6 @@ CREATE TABLE `sys_dept` (
 
 
 
-# Dump of table sys_dict_data
-# ------------------------------------------------------------
 
 CREATE TABLE `sys_dict_data` (
   `dict_code` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '字典编码',
@@ -130,8 +124,6 @@ CREATE TABLE `sys_dict_data` (
 
 
 
-# Dump of table sys_dict_type
-# ------------------------------------------------------------
 
 CREATE TABLE `sys_dict_type` (
   `dict_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '字典主键',
@@ -151,9 +143,6 @@ CREATE TABLE `sys_dict_type` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='字典类型表';
 
 
-
-# Dump of table sys_ldap_config
-# ------------------------------------------------------------
 
 CREATE TABLE `sys_ldap_config` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
@@ -175,8 +164,6 @@ CREATE TABLE `sys_ldap_config` (
 
 
 
-# Dump of table sys_logininfor
-# ------------------------------------------------------------
 
 CREATE TABLE `sys_logininfor` (
   `info_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '访问ID',
@@ -194,8 +181,6 @@ CREATE TABLE `sys_logininfor` (
 
 
 
-# Dump of table sys_menu
-# ------------------------------------------------------------
 
 CREATE TABLE `sys_menu` (
   `menu_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '菜单ID',
@@ -223,8 +208,6 @@ CREATE TABLE `sys_menu` (
 
 
 
-# Dump of table sys_notice
-# ------------------------------------------------------------
 
 CREATE TABLE `sys_notice` (
   `notice_id` int(4) NOT NULL AUTO_INCREMENT COMMENT '公告ID',
@@ -244,9 +227,6 @@ CREATE TABLE `sys_notice` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='通知公告表';
 
 
-
-# Dump of table sys_oper_log
-# ------------------------------------------------------------
 
 CREATE TABLE `sys_oper_log` (
   `oper_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '日志主键',
@@ -273,8 +253,6 @@ CREATE TABLE `sys_oper_log` (
 
 
 
-# Dump of table sys_post
-# ------------------------------------------------------------
 
 CREATE TABLE `sys_post` (
   `post_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '岗位ID',
@@ -295,8 +273,6 @@ CREATE TABLE `sys_post` (
 
 
 
-# Dump of table sys_role
-# ------------------------------------------------------------
 
 CREATE TABLE `sys_role` (
   `role_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '角色ID',
@@ -319,8 +295,6 @@ CREATE TABLE `sys_role` (
 
 
 
-# Dump of table sys_role_dept
-# ------------------------------------------------------------
 
 CREATE TABLE `sys_role_dept` (
   `role_id` bigint(20) NOT NULL COMMENT '角色ID',
@@ -332,9 +306,6 @@ CREATE TABLE `sys_role_dept` (
 
 
 
-# Dump of table sys_role_menu
-# ------------------------------------------------------------
-
 CREATE TABLE `sys_role_menu` (
   `role_id` bigint(20) NOT NULL COMMENT '角色ID',
   `menu_id` bigint(20) NOT NULL COMMENT '菜单ID',
@@ -344,9 +315,6 @@ CREATE TABLE `sys_role_menu` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='角色和菜单关联表';
 
 
-
-# Dump of table sys_user
-# ------------------------------------------------------------
 
 CREATE TABLE `sys_user` (
   `user_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '用户ID',
@@ -379,8 +347,6 @@ CREATE TABLE `sys_user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='用户信息表';
 
 
-# Dump of table sys_user_post
-# ------------------------------------------------------------
 
 CREATE TABLE `sys_user_post` (
   `user_id` bigint(20) NOT NULL COMMENT '用户ID',
@@ -392,9 +358,6 @@ CREATE TABLE `sys_user_post` (
 
 
 
-# Dump of table sys_user_role
-# ------------------------------------------------------------
-
 CREATE TABLE `sys_user_role` (
   `user_id` bigint(20) NOT NULL COMMENT '用户ID',
   `role_id` bigint(20) NOT NULL COMMENT '角色ID',
@@ -402,12 +365,6 @@ CREATE TABLE `sys_user_role` (
   `gmt_modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
   PRIMARY KEY (`user_id`,`role_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='用户和角色关联表';
-
-
-
-
-
-
 
 
 INSERT INTO `sys_config` (`config_id`, `config_name`, `config_key`, `config_value`, `config_type`, `create_by`, `create_time`, `update_by`, `update_time`, `remark`, `gmt_create`, `gmt_modified`)
@@ -464,7 +421,12 @@ VALUES
 	(27,10,'运行','10','sys_oper_type','','danger','N','0','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00','清空操作','2020-12-06 13:15:38','2020-12-06 13:15:38'),
 	(28,11,'查询','11','sys_oper_type','','info','N','0','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00','清空操作','2020-12-06 13:15:38','2020-12-06 13:15:38'),
 	(29,1,'成功','0','sys_common_status','','primary','N','0','admin','2018-03-16 11:33:00','user','2020-12-04 11:34:43','正常状态','2020-12-06 13:15:38','2020-12-06 13:15:38'),
-	(30,2,'失败','1','sys_common_status','','danger','N','0','admin','2018-03-16 11:33:00','user','2020-12-04 11:35:00','停用状态','2020-12-06 13:15:38','2020-12-06 13:15:38');
+	(30,2,'失败','1','sys_common_status','','danger','N','0','admin','2018-03-16 11:33:00','user','2020-12-04 11:35:00','停用状态','2020-12-06 13:15:38','2020-12-06 13:15:38'),
+	(31,1,'正常','0','sys_account_status','','danger','N','0','admin','2018-03-16 11:33:00','user','2020-12-04 11:35:00','停用状态','2020-12-06 13:15:38','2020-12-06 13:15:38'),
+	(32,2,'停运','1','sys_account_status','','danger','N','0','admin','2018-03-16 11:33:00','user','2020-12-04 11:35:00','停用状态','2020-12-06 13:15:38','2020-12-06 13:15:38'),
+	(33,3,'禁用','2','sys_account_status','','danger','N','0','admin','2018-03-16 11:33:00','user','2020-12-04 11:35:00','停用状态','2020-12-06 13:15:38','2020-12-06 13:15:38'),
+	(34,1,'系统','0','sys_account_create','','danger','N','0','admin','2018-03-16 11:33:00','user','2020-12-04 11:35:00','停用状态','2020-12-06 13:15:38','2020-12-06 13:15:38'),
+	(35,2,'LDAP','1','sys_account_create','','danger','N','0','admin','2018-03-16 11:33:00','user','2020-12-04 11:35:00','停用状态','2020-12-06 13:15:38','2020-12-06 13:15:38');
 
 
 
@@ -479,7 +441,9 @@ VALUES
 	(7,'通知类型','sys_notice_type','0','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00','通知类型列表','2020-12-06 13:15:38','2020-12-06 13:15:38'),
 	(8,'通知状态','sys_notice_status','0','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00','通知状态列表','2020-12-06 13:15:38','2020-12-06 13:15:38'),
 	(9,'操作类型','sys_oper_type','0','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00','操作类型列表','2020-12-06 13:15:38','2020-12-06 13:15:38'),
-	(10,'系统状态','sys_common_status','0','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00','登录状态列表','2020-12-06 13:15:38','2020-12-06 13:15:38');
+	(10,'系统状态','sys_common_status','0','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00','登录状态列表','2020-12-06 13:15:38','2020-12-06 13:15:38'),
+	(11,'账号状态','sys_account_status','0','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00','登录状态列表','2020-12-06 13:15:38','2020-12-06 13:15:38'),
+	(12,'账号创建方式','sys_account_create','0','admin','2018-03-16 11:33:00','ry','2018-03-16 11:33:00','登录状态列表','2020-12-06 13:15:38','2020-12-06 13:15:38');
 
 
 
@@ -626,7 +590,7 @@ VALUES
 
 INSERT INTO `sys_role_dept` (`role_id`, `dept_id`, `gmt_create`, `gmt_modified`)
 VALUES
-	(2,100,'2020-12-06 13:15:53','2020-12-06 13:15:53'),
+	(2,100,'2020-12-06 13:15:53','2020-12-06 13:15:53');
 
 
 INSERT INTO `sys_role_menu` (`role_id`, `menu_id`, `gmt_create`, `gmt_modified`)
@@ -825,15 +789,262 @@ VALUES
 
 INSERT INTO `sys_user_post` (`user_id`, `post_id`, `gmt_create`, `gmt_modified`)
 VALUES
-	(1,1,'2020-12-06 13:15:53','2020-12-06 13:15:54'),
+	(1,1,'2020-12-06 13:15:53','2020-12-06 13:15:54');
 
 
 INSERT INTO `sys_user_role` (`user_id`, `role_id`, `gmt_create`, `gmt_modified`)
 VALUES
-	(1,1,'2020-12-06 13:15:54','2020-12-06 13:15:54'),
+	(1,1,'2020-12-06 13:15:54','2020-12-06 13:15:54');
+
+
+-----xxl-job
+
+CREATE TABLE `xxl_job_alarm_info` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `alarm_type` varchar(80) NOT NULL COMMENT '报警类型',
+  `alarm_name` varchar(100) DEFAULT '' COMMENT '告警方式名称',
+  `alarm_status` int(11) DEFAULT '1' COMMENT '状态:1 启用 0 禁用',
+  `alarm_template` varchar(1000) DEFAULT '' COMMENT '告警模板',
+  `alarm_url` varchar(600) DEFAULT '' COMMENT '告警地址',
+  `redirect_url` varchar(200) DEFAULT '' COMMENT '跳转地址',
+  `alarm_host` varchar(200) DEFAULT '' COMMENT '告警主机地址',
+  `alarm_port` varchar(60) DEFAULT '' COMMENT '告警端口',
+  `alarm_username` varchar(100) DEFAULT '' COMMENT '告警账号',
+  `alarm_password` varchar(200) DEFAULT '' COMMENT '告警密码',
+  `http_param` varchar(600) DEFAULT '' COMMENT '请求的参数',
+  `http_way` varchar(20) DEFAULT '' COMMENT '请求的方式',
+  `http_headers` varchar(300) DEFAULT '' COMMENT '请求的headers',
+  `connection_status` int(11) DEFAULT '0' COMMENT '连通的状态: 0 未测试,1 成功 2失败',
+  `create_by` varchar(64) DEFAULT '' COMMENT '创建者',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `update_by` varchar(64) DEFAULT '' COMMENT '更新者',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  `gmt_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `gmt_modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  PRIMARY KEY (`id`),
+  KEY `idx_job_alarm` (`alarm_type`,`alarm_status`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='任务告警方式配置表';
 
 
 
 
+CREATE TABLE `xxl_job_alarm_log` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `log_id` bigint(20) NOT NULL COMMENT '任务日志id',
+  `job_id` bigint(20) DEFAULT '0' COMMENT '任务id',
+  `job_name` varchar(100) DEFAULT NULL COMMENT '任务名称',
+  `alarm_id` int(11) DEFAULT NULL COMMENT '告警方式id',
+  `alarm_name` varchar(100) DEFAULT '' COMMENT '告警方式名称',
+  `send_status` int(2) DEFAULT '0' COMMENT '发送状态:1 成功 0 失败',
+  `notice_username` varchar(300) DEFAULT '' COMMENT '通知人姓名',
+  `notice_way` varchar(300) DEFAULT '' COMMENT '通知方式的途径',
+  `error_msg` varchar(400) DEFAULT '' COMMENT '错误信息',
+  `gmt_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `gmt_modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  PRIMARY KEY (`id`),
+  KEY `idx_log_id` (`log_id`),
+  KEY `idx_job_id_send_status` (`job_id`,`send_status`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='任务告警记录';
+
+
+
+
+create table xxl_job_group
+(
+  id             bigint(20) unsigned auto_increment comment 'id'
+    primary key,
+  app_name       varchar(64)                            not null comment '执行器AppName',
+  title          varchar(64)                            not null comment '执行器名称',
+  `order`        int(11)          default 0                 not null comment '排序',
+  address_type   tinyint(4)      default 0                 not null comment '执行器地址类型：0=自动注册、1=手动录入',
+  client_version varchar(100) default ''                null comment '客户端的版本',
+  address_list   varchar(512)                           null comment '执行器地址列表，多地址逗号分隔',
+  alarm_status   tinyint(4)      default 0                 not null comment '告警状态:0 关闭 1开启',
+  alarm_ids      varchar(200)                           null comment '告警方式:sms:短信 email:邮箱 dingding wxwechat,mobile',
+  gmt_create     datetime     default CURRENT_TIMESTAMP not null comment '创建时间',
+  gmt_modified   datetime     default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '修改时间'
+)
+  comment 'job执行器' charset = utf8mb4;
+
+create index idx_alarm_status
+  on xxl_job_group (address_type, alarm_status);
+
+create index idx_app_name
+  on xxl_job_group (app_name);
+
+
+create table xxl_job_info
+(
+  id                        bigint(20) unsigned auto_increment comment 'id'
+    primary key,
+  job_group                 bigint(20)                               not null comment '执行器主键ID',
+  job_cron                  varchar(128)                         not null comment '任务执行CRON',
+  job_name                  varchar(255)                         not null comment '任务名称',
+  job_status                int        default 0                 not null comment '任务状态：0-未运行，1-运行中 200 成功 500 失败',
+  create_way                tinyint    default 0                 not null comment '创建方式：0-界面创建，1-API创建',
+  add_time                  datetime                             null comment '业务添加时间',
+  update_time               datetime                             null comment '业务更新时间',
+  author                    varchar(64)                          null comment '创建人',
+  alarm_user_ids            varchar(255)                         null comment '报警人',
+  executor_route_strategy   varchar(50)                          null comment '执行器路由策略',
+  executor_handler          varchar(255)                         null comment '执行器任务handler',
+  executor_param            varchar(512)                         null comment '执行器任务参数',
+  executor_block_strategy   varchar(50)                          null comment '阻塞处理策略',
+  executor_timeout          int        default 0                 not null comment '任务执行超时时间，单位秒',
+  executor_fail_retry_count int        default 0                 not null comment '失败重试次数',
+  glue_type                 varchar(50)                          not null comment 'GLUE类型',
+  glue_source               mediumtext                           null comment 'GLUE源代码',
+  glue_remark               varchar(128)                         null comment 'GLUE备注',
+  glue_updatetime           datetime                             null comment 'GLUE更新时间',
+  child_job_id              varchar(255)                         null comment '子任务ID，多个逗号分隔',
+  trigger_status            tinyint    default 0                 not null comment '调度状态：0-停止，1-运行',
+  trigger_last_time         bigint(20) default 0                 not null comment '上次调度时间',
+  trigger_next_time         bigint(20) default 0                 not null comment '下次调度时间',
+  last_job_log_id           bigint     default 0                 not null comment '上一次任务执行的日志id',
+  last_trigger_code         int        default 0                 not null comment '上一次调度-结果',
+  last_trigger_time         datetime                             null comment '上一次调度-时间',
+  last_handle_code          int        default 0                 not null comment '上一次执行-结果',
+  last_handle_time          datetime                             null comment '上一次执行-时间',
+  gmt_create                datetime   default CURRENT_TIMESTAMP not null comment '创建时间',
+  gmt_modified              datetime   default CURRENT_TIMESTAMP not null on update CURRENT_TIMESTAMP comment '修改时间'
+)
+  comment 'job任务信息' charset = utf8mb4;
+
+create index idx_job_group
+  on xxl_job_info (job_group);
+
+create index idx_job_group_glue_type
+  on xxl_job_info (job_group, glue_type, job_status, trigger_status);
+
+create index idx_trigger_status_trigger_next_time
+  on xxl_job_info (trigger_status, trigger_next_time);
+
+
+
+
+CREATE TABLE `xxl_job_lock` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `lock_name` varchar(50) NOT NULL COMMENT '锁名称',
+  `gmt_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `gmt_modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uniq_lock` (`lock_name`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='job任务调度锁';
+
+
+
+
+CREATE TABLE `xxl_job_log` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `job_request_id` varchar(60) NOT NULL DEFAULT '' COMMENT '任务调用id',
+  `job_name` varchar(255) NOT NULL DEFAULT '' COMMENT '任务名称',
+  `job_group` bigint(20) NOT NULL DEFAULT '-1' COMMENT '执行器主键ID',
+  `job_id` bigint(20) NOT NULL DEFAULT '-1' COMMENT '任务，主键ID',
+  `job_status` int(11) NOT NULL DEFAULT '0' COMMENT '任务运行总状态:0  未开始 1 进行中 200 成功 500 失败',
+  `executor_address` varchar(255) DEFAULT NULL COMMENT '执行器地址，本次执行的地址',
+  `executor_handler` varchar(255) DEFAULT NULL COMMENT '执行器任务handler',
+  `executor_param` varchar(512) DEFAULT NULL COMMENT '执行器任务参数',
+  `executor_sharding_param` varchar(20) DEFAULT NULL COMMENT '执行器任务分片参数，格式如 1/2',
+  `executor_fail_retry_count` int(11) NOT NULL DEFAULT '0' COMMENT '失败重试次数',
+  `trigger_type` int(11) NOT NULL DEFAULT '0' COMMENT '触发方式：0 系统执行 1手动执行',
+  `trigger_address` varchar(150) NOT NULL DEFAULT '' COMMENT '执行器地址',
+  `trigger_time` datetime DEFAULT NULL COMMENT '调度-时间',
+  `trigger_code` int(11) NOT NULL DEFAULT '0' COMMENT '调度-结果:0 默认 200 成功 非200失败',
+  `trigger_msg` text COMMENT '调度-日志',
+  `handle_time` datetime DEFAULT NULL COMMENT '执行-时间',
+   handle_code int(11) default -1 not null comment '执行-状态: -1 默认 0 运行中 200 成功 非200失败',
+  `handle_msg` text COMMENT '执行-日志',
+  `alarm_status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '告警状态：0-默认、1-无需告警、2-告警成功、3-告警失败',
+  `gmt_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `gmt_modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  PRIMARY KEY (`id`),
+  KEY `idx_gmt_create` (`gmt_create`),
+  KEY `idx_job_log_search` (`job_id`,`job_group`,`job_status`,`trigger_time`),
+  KEY `idx_job_trigger_code` (`trigger_code`,`alarm_status`),
+  KEY `idx_job_handle_code` (`handle_code`,`alarm_status`),
+  KEY `idx_job_job_id` (`job_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='job调度日志';
+
+
+
+
+CREATE TABLE `xxl_job_log_report` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `trigger_day` date DEFAULT NULL COMMENT '调度-时间',
+  `running_count` bigint(20) NOT NULL DEFAULT '0' COMMENT '运行中-日志数量',
+  `suc_count` bigint(20) NOT NULL DEFAULT '0' COMMENT '执行成功-日志数量',
+  `fail_count` bigint(20) NOT NULL DEFAULT '0' COMMENT '执行失败-日志数量',
+  `gmt_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `gmt_modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uniq_trigger_day` (`trigger_day`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='job报表';
+
+
+
+
+CREATE TABLE `xxl_job_logglue` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `job_id` bigint(20) NOT NULL DEFAULT '-1' COMMENT '任务，主键ID',
+  `glue_type` varchar(50) DEFAULT NULL COMMENT 'GLUE类型',
+  `glue_source` mediumtext COMMENT 'GLUE源代码',
+  `glue_remark` varchar(128) NOT NULL DEFAULT '' COMMENT 'GLUE备注',
+  `add_time` timestamp NULL DEFAULT NULL COMMENT '添加时间',
+  `update_time` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  `gmt_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `gmt_modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  PRIMARY KEY (`id`),
+  KEY `idx_job_id_glue_type` (`job_id`,`glue_type`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='xxl_job_logglue';
+
+
+
+
+CREATE TABLE `xxl_job_registry` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `registry_group` varchar(30) NOT NULL COMMENT '注册组',
+  `registry_key` varchar(64) NOT NULL COMMENT '注册的key',
+  `registry_value` varchar(64) NOT NULL COMMENT '注册的值',
+  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '最后更新时间',
+  `gmt_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `gmt_modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  PRIMARY KEY (`id`),
+  KEY `idx_group_key_value` (`registry_group`,`registry_key`,`registry_value`),
+  KEY `idx_update_time` (`update_time`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='job 注册信息';
+
+
+
+
+CREATE TABLE `xxl_job_schedule_config` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `config_key` varchar(80) NOT NULL COMMENT 'key',
+  `config_value` varchar(400) DEFAULT '' COMMENT '值',
+  `config_Status` int(11) DEFAULT '1' COMMENT '状态:1 启用 0 禁用',
+  `create_by` varchar(64) DEFAULT '' COMMENT '创建者',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `update_by` varchar(64) DEFAULT '' COMMENT '更新者',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  `gmt_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `gmt_modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '修改时间',
+  PRIMARY KEY (`id`),
+  UNIQUE `uniq_config_key` (`config_key`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='任务管理配置表';
+
+
+CREATE TABLE `xxl_job_thread` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT 'id',
+  `address` varchar(80) NOT NULL COMMENT '机器地址',
+  `host_name` varchar(100) DEFAULT NULL COMMENT '机器名称',
+  `thread_type` int(11) DEFAULT NULL COMMENT '线程类型',
+  `thread_status` int(11) DEFAULT '1' COMMENT '状态:1 启用 0 禁用',
+  `last_online_time` datetime DEFAULT NULL COMMENT '最近一下在线时间',
+  `update_by` varchar(64) DEFAULT '' COMMENT '更新者',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  `gmt_create` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+  `gmt_modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '修改时间',
+  PRIMARY KEY (`id`),
+  UNIQUE `uniq_job_thread` (`address`,`thread_type`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='任务调度表';
 
 

@@ -1,0 +1,61 @@
+# 开发环境配置
+server:
+  # 服务器的HTTP端口，默认为8080
+  port: 7040
+# 数据源配置
+spring:
+  profiles:
+    active: prod
+  datasource:
+    druid:
+      # 主库数据源
+      master:
+        url: jdbc:mysql://${mysql_ip}:${mysql_port}/xxl_job?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+        username: ${mysql_user}
+        password: ${mysql_password}
+  # redis 配置
+  redis:
+    # 地址
+    host: ${redis_ip}
+    # 端口，默认为6379
+    port: ${redis_port}
+    # 密码
+    password: ${redis_password}
+xxl:
+  job:
+    accessToken: 0e8701d4307a445c90b4e70565893a95
+    adminAddresses: http://127.0.0.1:7040
+    applicationName: 调度平台-开发环境
+    executor:
+      appName: xxl-job
+      title: xxl-job
+      autoCreateJob: true
+      autoStartJob: true
+      ip: ''
+      logpath: /data/logs/xxl-job/jobhandler
+      logretentiondays: 3
+      port: 7998
+log:
+  dir:  /data/logs/${spring.application.name}
+  level: info
+login:
+  # 登录缓存
+  cache-enable: true
+  #  是否限制单用户登录
+  single: false
+  #  验证码
+  captcha-code:
+    #  验证码类型配置 查看 CaptchaProperties 类
+    code-type: spec
+    #  登录图形验证码有效时间/分钟
+    expiration: 2
+    #  验证码高度
+    width: 111
+    #  验证码宽度
+    heigth: 36
+    # 内容长度
+    length: 2
+    # 字体名称，为空则使用默认字体
+    font-name:
+    # 字体大小
+    font-size: 25

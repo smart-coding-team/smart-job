@@ -8,7 +8,7 @@ XXL-JOB是一个分布式任务调度平台，其核心设计目标是开发迅�
 ## 在线体验
 
 - demo/demo123 
-- 陆陆续续收到一些打赏，为了更好的体验已用于演示服务器升级。谢谢各位小伙伴。
+- 如果喜欢😍，麻烦点个star
 
 演示地址：http://42.192.74.179:1024/
 
@@ -45,3 +45,7 @@ XXL-JOB是一个分布式任务调度平台，其核心设计目标是开发迅�
 ![avatar](doc/image/告警配置.png)
 ![avatar](doc/image/用户管理.png)
 ![avatar](doc/image/角色管理.png)
+
+## 赞助二维码(鼓励一下)
+
+![avatar](doc/image/pay20.jpeg)

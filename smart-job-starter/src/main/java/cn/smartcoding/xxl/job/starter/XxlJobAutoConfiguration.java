@@ -1,6 +1,6 @@
 package cn.smartcoding.xxl.job.starter;
 
-import cn.smartcoding.xxl.job.core.executor.impl.XxlJobSpringExecutor;
+import cn.smartcoding.job.core.executor.impl.XxlJobSpringExecutor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;

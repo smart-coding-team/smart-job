@@ -42,7 +42,7 @@ public class GlueFactory {
      * load new instance, prototype
      *
      * @param codeSource
-     * @return
+     * @return 任务执行器
      * @throws Exception
      */
     public IJobHandler loadNewInstance(String codeSource) throws Exception {
@@ -84,7 +84,7 @@ public class GlueFactory {
     /**
      * inject service of bean field
      *
-     * @param instance
+     * @param instance 实例
      */
     public void injectService(Object instance) {
         // do something

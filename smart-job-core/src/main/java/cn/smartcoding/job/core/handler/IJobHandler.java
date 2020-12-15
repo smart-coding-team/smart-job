@@ -29,14 +29,14 @@ public abstract class IJobHandler {
     /**
      * execute handler, invoked when executor receives a scheduling request
      *
-     * @param param
-     * @return
+     * @param param param
+     * @return  execute result
      * @throws Exception
      */
     public abstract ReturnT<String> execute(String param) throws Exception;
 
     /**
-     * init handler, invoked when JobThread init
+     * init handler, invoked when JobThread initJobThread
      */
     public void init() throws InvocationTargetException, IllegalAccessException {
         // do something

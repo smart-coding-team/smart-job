@@ -57,9 +57,9 @@ public class ExecutorBizImpl implements ExecutorBiz {
     }
 
     @Override
-    public ReturnT<LogResult> log(long logDateTim, Long logId, int fromLineNum) {
+    public ReturnT<LogResult> log(long logDateTime, Long logId, int fromLineNum) {
         // log filename: logPath/yyyy-MM-dd/9999.log
-        String logFileName = XxlJobFileAppender.makeLogFileName(new Date(logDateTim), logId);
+        String logFileName = XxlJobFileAppender.makeLogFileName(new Date(logDateTime), logId);
 
         LogResult logResult = XxlJobFileAppender.readLog(logFileName, fromLineNum);
         return new ReturnT<LogResult>(logResult);

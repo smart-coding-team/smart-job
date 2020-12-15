@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>cn.smartcoding</groupId>
 	<artifactId>smart-job-core</artifactId>
-	<version>2.0.0</version>
+	<version>1.0.0</version>
 	<packaging>jar</packaging>
 
 	<name>smart-job-core</name>
@@ -46,7 +46,7 @@
 		<maven-source-plugin.version>3.1.0</maven-source-plugin.version>
 		<maven-javadoc-plugin.version>3.1.0</maven-javadoc-plugin.version>
 		<maven-war-plugin.version>3.2.2</maven-war-plugin.version>
-		<maven-gpg-plugin.version>1.8</maven-gpg-plugin.version>
+		<maven-gpg-plugin.version>1.6</maven-gpg-plugin.version>
 		<xxl-rpc.version>1.4.1</xxl-rpc.version>
 		<slf4j-api.version>1.7.25</slf4j-api.version>
 		<commons-exec.version>1.3</commons-exec.version>
@@ -136,9 +136,6 @@
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-gpg-plugin</artifactId>
 						<version>${maven-gpg-plugin.version}</version>
-						<configuration>
-							<useAgent>false</useAgent>
-						</configuration>
 						<executions>
 							<execution>
 								<phase>verify</phase>
@@ -152,11 +149,11 @@
 			</build>
 			<distributionManagement>
 				<snapshotRepository>
-					<id>oss</id>
+					<id>snapshots</id>
 					<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
 				</snapshotRepository>
 				<repository>
-					<id>oss</id>
+					<id>snapshots</id>
 					<url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
 				</repository>
 			</distributionManagement>

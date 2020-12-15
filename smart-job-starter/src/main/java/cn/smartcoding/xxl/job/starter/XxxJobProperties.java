@@ -3,8 +3,8 @@ package cn.smartcoding.xxl.job.starter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
+ *  xxxJobProperties
  * @author 无缺
- * @date 2019-07-28
  */
 @ConfigurationProperties(prefix = "xxl.job")
 public class XxxJobProperties {

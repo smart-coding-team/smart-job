@@ -11,8 +11,8 @@ import org.springframework.context.annotation.Configuration;
 import javax.annotation.Resource;
 
 /**
+ * XxlJobAutoConfiguration
  * @author 无缺
- * @date 2019-07-28
  */
 @Configuration
 @EnableConfigurationProperties(XxxJobProperties.class)

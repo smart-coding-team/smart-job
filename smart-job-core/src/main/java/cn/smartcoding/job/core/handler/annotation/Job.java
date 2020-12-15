@@ -20,28 +20,28 @@ public @interface Job {
     /**
      * 执行器任务handler
      *
-     * @return
+     * @return  执行器名称
      */
     String executorHandler();
 
     /**
      * 任务名称
      *
-     * @return
+     * @return 任务名称
      */
     String jobName();
 
     /**
      * 任务执行CRON
      *
-     * @return
+     * @return 任务执行CRON
      */
     String jobCron();
 
     /**
      * 执行器任务参数
      *
-     * @return
+     * @return 执行器任务参数
      */
     String executorParam() default "";
 
@@ -55,28 +55,28 @@ public @interface Job {
     /**
      * 阻塞处理策略
      *
-     * @return
+     * @return 阻塞处理策略
      */
     ExecutorBlockStrategyEnum executorBlockStrategy() default ExecutorBlockStrategyEnum.SERIAL_EXECUTION;
 
     /**
      * 任务执行超时时间，单位秒
      *
-     * @return
+     * @return 任务执行超时时间
      */
     int executorTimeout() default 0;
 
     /**
      * 失败重试次数
      *
-     * @return
+     * @return 失败重试次数
      */
     int executorFailRetryCount() default 0;
 
     /**
      * 子任务ID，多个逗号分隔
      *
-     * @return
+     * @return 子任务ID
      */
     String childJobId() default "";
 

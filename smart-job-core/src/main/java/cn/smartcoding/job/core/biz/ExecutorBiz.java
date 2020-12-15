@@ -13,7 +13,7 @@ public interface ExecutorBiz {
     /**
      * beat
      *
-     * @return
+     * @return  result
      */
     ReturnT<String> beat();
 
@@ -21,7 +21,7 @@ public interface ExecutorBiz {
      * idle beat
      *
      * @param jobId
-     * @return
+     * @return result
      */
     ReturnT<String> idleBeat(Long jobId);
 
@@ -29,25 +29,25 @@ public interface ExecutorBiz {
      * kill
      *
      * @param jobId
-     * @return
+     * @return result
      */
     ReturnT<String> kill(Long jobId);
 
     /**
      * log
      *
-     * @param logDateTim
-     * @param logId
-     * @param fromLineNum
-     * @return
+     * @param logDateTime   start time
+     * @param logId    jobLogId
+     * @param fromLineNum  from line num
+     * @return  result
      */
-    ReturnT<LogResult> log(long logDateTim, Long logId, int fromLineNum);
+    ReturnT<LogResult> log(long logDateTime, Long logId, int fromLineNum);
 
     /**
      * run
      *
-     * @param triggerParam
-     * @return
+     * @param triggerParam  trigger
+     * @return  result
      */
     ReturnT<String> run(TriggerParam triggerParam);
 

@@ -6,7 +6,7 @@
 
     <groupId>cn.smartcoding</groupId>
   <artifactId>smart-job</artifactId>
-    <version>3.0.0</version>
+    <version>1.0.0</version>
 
     <name>smart-job</name>
     <description> a distributed task scheduling framework</description>
@@ -49,7 +49,7 @@
     <packaging>pom</packaging>
 
     <properties>
-        <smart.job.version>3.0.0</smart.job.version>
+        <smart.job.version>1.0.0</smart.job.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>

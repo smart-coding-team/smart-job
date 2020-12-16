@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * TODO 待优化 token过滤器 验证token有效性
+ *
  * DaoAuthenticationProvider
  *
  * @author wuque

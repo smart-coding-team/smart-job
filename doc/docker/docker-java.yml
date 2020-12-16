@@ -1,7 +1,7 @@
 version: '2.2'
 services:
   smart-job:
-    image: wuque1024/smart-job:v2.0.0
+    image: wuque1024/smart-job:v1.0.0
     container_name: smart-job
     network_mode: host
     restart: always

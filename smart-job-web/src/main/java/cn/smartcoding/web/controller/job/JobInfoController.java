@@ -4,10 +4,12 @@ package cn.smartcoding.web.controller.job;
 import cn.hutool.core.util.StrUtil;
 import cn.smartcoding.common.annotation.Log;
 import cn.smartcoding.common.core.domain.CommonErrorCode;
-import cn.smartcoding.common.exception.CommonException;
 import cn.smartcoding.common.core.domain.ResultModel;
 import cn.smartcoding.common.enums.BusinessType;
+import cn.smartcoding.common.exception.CommonException;
 import cn.smartcoding.common.utils.SecurityUtils;
+import cn.smartcoding.job.core.cron.CronExpression;
+import cn.smartcoding.job.core.util.DateUtil;
 import cn.smartcoding.schedule.core.model.XxlJobInfo;
 import cn.smartcoding.schedule.core.model.bo.XxlShortJobInfoBO;
 import cn.smartcoding.schedule.core.thread.JobTriggerPoolHelper;
@@ -15,8 +17,6 @@ import cn.smartcoding.schedule.core.trigger.TriggerTypeEnum;
 import cn.smartcoding.schedule.core.util.I18nUtil;
 import cn.smartcoding.schedule.dto.TriggerJobDto;
 import cn.smartcoding.schedule.service.XxlJobService;
-import cn.smartcoding.job.core.cron.CronExpression;
-import cn.smartcoding.job.core.util.DateUtil;
 import io.swagger.annotations.Api;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -77,6 +77,17 @@ public class JobInfoController {
     @Log(title = "更新任务", businessType = BusinessType.UPDATE)
     public ResultModel update(HttpServletRequest request, @RequestBody XxlJobInfo jobInfo) {
         return ResultModel.success(jobService.update(jobInfo));
+    }
+
+    /**
+     * 复制任务
+     */
+    @PostMapping("/copy/{id}")
+    @PreAuthorize("@ss.hasPermi('job:jobInfo:copy')")
+    @Log(title = "复制任务", businessType = BusinessType.INSERT)
+    public ResultModel copy(@PathVariable(value = "id") Long id) {
+        String username = SecurityUtils.getUsername();
+        return ResultModel.success(jobService.copy(id, username));
     }
 
     /**

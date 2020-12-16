@@ -108,4 +108,6 @@ public interface XxlJobService {
     void changeJobCreateWay(Long id, Integer status);
 
     void changeJobStatus(Long id, Integer status);
+
+    Long copy(Long id, String username);
 }

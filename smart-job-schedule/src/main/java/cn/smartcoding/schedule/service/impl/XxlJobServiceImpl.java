@@ -6,6 +6,7 @@ import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.smartcoding.common.core.domain.CommonErrorCode;
 import cn.smartcoding.common.exception.CommonException;
+import cn.smartcoding.common.exception.CustomException;
 import cn.smartcoding.job.core.enums.ExecutorBlockStrategyEnum;
 import cn.smartcoding.job.core.glue.GlueTypeEnum;
 import cn.smartcoding.job.core.util.DateUtil;
@@ -430,6 +431,24 @@ public class XxlJobServiceImpl implements XxlJobService {
         } else {
             stop(id);
         }
+    }
 
+    @Override
+    public Long copy(Long id, String username) {
+        XxlJobInfo xxlJobInfo = xxlJobInfoDao.selectByPrimaryKey(id);
+        if (xxlJobInfo == null) {
+            throw new CustomException("任务不存在");
+        }
+        xxlJobInfo.setJobName(xxlJobInfo.getJobName()+"Copy");
+        xxlJobInfo.setId(null);
+        xxlJobInfo.setAuthor(username);
+        xxlJobInfo.setTriggerStatus(TriggerStatusEnum.STOPPING.getCode());
+        xxlJobInfo.setUpdateTime(new Date());
+        xxlJobInfo.setAddTime(new Date());
+        xxlJobInfoDao.insertSelective(xxlJobInfo);
+        if (xxlJobInfo.getId() < 1) {
+            throw new CommonException(CommonErrorCode.ERROR, (I18nUtil.getString("jobinfo_field_add") + I18nUtil.getString("system_fail")));
+        }
+        return xxlJobInfo.getId();
     }
 }

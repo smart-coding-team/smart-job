@@ -55,7 +55,6 @@ build/*
 nbbuild/
 logs/
 dist/
-data/
 nbdist/
 .nb-gradle/
 

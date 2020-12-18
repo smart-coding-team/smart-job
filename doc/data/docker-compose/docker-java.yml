@@ -1,0 +1,75 @@
+version: '2.2'
+services:
+  smart-job:
+    image: wuque1024/smart-job:v1.0.0
+    container_name: smart-job
+    network_mode: ${network_mode}
+    restart: ${restart_mode}
+    dns:
+      - 223.5.5.5
+      - 223.6.6.6
+    volumes:
+      - ${host_data_dir}/logs:/data/logs
+      - ${host_data_dir}/config:/data/config
+    environment:
+      - JAVA_XMX=512
+      - JAVA_XMN=512
+      - GcLogPath=${host_data_dir}/logs/smart-job
+      - ACTIVE_PROFILE=prod
+      - mysql_ip=${mysql_ip}
+      - mysql_user=${mysql_user}
+      - mysql_password=${mysql_password}
+      - mysql_port=${mysql_port}
+      - redis_ip=${redis_ip}
+      - redis_port=${redis_port}
+      - redis_password=${redis_password}
+      - host_data_dir=${host_data_dir}
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:7040/actuator/health"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+
+  nginx:
+    image: wuque1024/nginx
+    container_name: nginx
+    network_mode: ${network_mode}
+    restart: ${restart_mode}
+    dns:
+      - 223.5.5.5
+      - 223.6.6.6
+    privileged: true
+    volumes:
+      - ${host_data_dir}/nginx/conf.d:/usr/local/nginx/conf.d
+      - ${host_data_dir}/nginx/log:/usr/local/nginx/logs
+      - ${host_data_dir}/nginx/html:/usr/local/html
+      - ${host_data_dir}/nginx/record:/root/record
+
+  redis:
+    image:  wuque1024/redis:3.2.8
+    container_name: redis
+    network_mode: ${network_mode}
+    restart: ${restart_mode}
+    dns:
+      - 223.5.5.5
+      - 223.6.6.6
+    privileged: true
+    environment:
+      - REDIS_PASSWD=${redis_password}
+      - REDIS_PORT=${redis_port}
+      - REDIS_CLUSTER_STATUS=${redis_cluster_status}
+
+
+  mysql:
+    image: wuque1024/mysql:8.0.20
+    container_name: mysql
+    network_mode: ${network_mode}
+    restart: ${restart_mode}
+    dns:
+      - 223.5.5.5
+      - 223.6.6.6
+    privileged: true
+    volumes:
+      - ${host_data_dir}/mysql_data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=${mysql_password}

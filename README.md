@@ -27,6 +27,9 @@
 
 smart-job是一个分布式任务调度平台,学习简单，轻量级，易扩展，开箱即用,提供用户体验极佳的页面管理。
 
+## 架构图
+
+![avatar](doc/image/smart-job部署架构图.png)
 
 ## 在线体验
 
@@ -147,8 +150,6 @@ smart-job是一个分布式任务调度平台,学习简单，轻量级，易扩�
 
 
 ## 快速部署
-
-![avatar](doc/image/smart-job部署机构图.png)
 
 1、[一键部署](doc/data/READEM.md)
 
